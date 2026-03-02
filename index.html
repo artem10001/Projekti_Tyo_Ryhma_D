@@ -1,12 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="fi">
     <meta charset="utf-8"/> <!-- että Ä ja Ö kirjaimet toimis -->
-    <body>
-        <form id="kirjautmis_lomake"> <!--kirjautumis kenttä ja nappula-->
-            <input id="nimi" type="text" placeholder="Syötä Nimesi" value="" />
-            <input id="salasana" type="password" placeholder="Syötä Salasana" value=""/>
-            <input id="rekisteröidy_nappi" type="submit" value="Rekisteröidy" onClick="register()" />
-            <input id="kirjaudu_nappi" type="submit" value="Kirjaudu sisään" onClick="logout()" />
-        </form>
-    </body>
+        <body>
+            <div id="nayta_kayttaja" style="position: fixed; top: 10px; right: 10px; font-family: Arial, sans-serif; font-size: 16px;"></div>
+            <form id="kirjautmis_lomake"> <!--kirjautumis kenttä ja nappulat-->
+                <input id="nimi" type="text" placeholder="Syötä Nimesi" value="" />
+                <input id="salasana" type="password" placeholder="Syötä Salasana" value=""/>
+                <input id="rekisteröidy_nappi" type="button" value="Rekisteröidy" onClick="rekisteröidy()" />
+                <input id="kirjaudu_ulos_nappi" type="button" value="Kirjaudu ulos" onClick="logout()" style="display: none;"/>
+            </form>
+
+            <script src="scripts.js"></script>
+        </body>
 </html>

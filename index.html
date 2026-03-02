@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="fi">
-    <meta charset="utf-8"/>
+    <meta charset="utf-8"/> <!-- että Ä ja Ö kirjaimet toimis -->
     <body>
-        <form id="kirjautmis_lomake">
+        <form id="kirjautmis_lomake"> <!--kirjautumis kenttä ja nappula-->
             <input id="nimi" type="text" placeholder="Syötä Nimesi" value="" />
-            <input id="kirjaudu_nappi" type="submit" value="Kirjaudu sisään" onClick="kirjaudu()" />
+            <input id="salasana" type="password" placeholder="Syötä Salasana" value=""/>
+            <input id="rekisteröidy_nappi" type="submit" value="Rekisteröidy" onClick="register()" />
+            <input id="kirjaudu_nappi" type="submit" value="Kirjaudu sisään" onClick="logout()" />
         </form>
     </body>
 </html>

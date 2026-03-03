@@ -17,10 +17,6 @@ function rekisteröidy() {
 
     // näyttää rekisteröitymisen onnistumisen
     alert("Rekisteröityminen onnistui! Voit nyt kirjautua sisään.");
-
-    // piilottaa rekisteröitymis napin ja näyttää kirjautumis napin
-    document.getElementById("rekisteröidy_nappi").style.display = "none";
-    document.getElementById("kirjaudu_sisään_nappi").style.display = "inline";
 }
 
 function login() {

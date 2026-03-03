@@ -10,10 +10,11 @@ h1 { text-align:center; }
 .form-container { 
     background:rgb(247, 240, 227); 
     padding:20px; 
-    width:60%; 
+    width:40%; 
     margin:auto; 
     border-radius:10px; 
     box-shadow:0 0 10px rgba(0,0,0,0.1); 
+
 }
 button { 
     background:#306fa3; 
@@ -41,20 +42,28 @@ button:hover { background:#161557; }
 <form id="pizzaForm">
 
     <label><b>Valitse pizza</b></label><br><br>
-    <img src="Images/peperoni.webp" height="120">
+    <img src="Images/peperoni.webp" height="150">
     <input type="radio" name="pizza" value="Pepperoni 10"> Pepperoni 10€<br>
-    <img src="Images/hawaii.png" height="120" width="120">
+    <img src="Images/hawaii.png" height="120" width="150">
     <input type="radio" name="pizza" value="Hawaii 9"> Hawaii 9€<br>
-    <img src="Images/prosciutto.avif" height="120" width="120">
+    <img src="Images/prosciutto.avif" height="120" width="150">
     <input type="radio" name="pizza" value="Prosciutto 10"> Prosciutto 10€<br>
-    <img src="Images/margherita.webp" width="120">
+    <img src="Images/margherita.webp" width="150">
     <input type="radio" name="pizza" value="Margherita 9"> Margherita 9€<br>
-    <img src="Images/napoletana.avif" width="120">
+    <img src="Images/napoletana.avif" width="150">
     <input type="radio" name="pizza" value="Napoletana 10"> Napoletana 10€<br>
-    <img src="Images/diavola.avif" width="120">
+    <img src="Images/diavola.avif" width="150">
     <input type="radio" name="pizza" value="Diavola 9"> Diavola 9€<br><br>
 
+    <label><b>Haluatko gluteeniton pohja?</b></label><br></br>
+
+
+    <input type="radio" name="pohja" value="gluteeniton pohja">  Gluteeniton pohja (+2€)<br>
+
+    <input type="radio" name="pohja" value="Ei"> Ei<br>
+
     <label><b>Kuinka monta pizzaa haluat?</b></label><br><br>
+    
     
     <input type="radio" name="maara" value="1"> 1<br>
     <input type="radio" name="maara" value="2"> 2<br>

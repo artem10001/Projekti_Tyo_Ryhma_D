@@ -1,16 +1,64 @@
 <!DOCTYPE html>
-
 <html lang="fi">
-    <meta charset="utf-8"/> <!-- että Ä ja Ö kirjaimet toimis -->
-        <body>
-            <div id="nayta_kayttaja" style="position: fixed; top: 10px; right: 10px; font-family: Arial, sans-serif; font-size: 16px;"></div>
-            <form id="kirjautmis_lomake"> <!--kirjautumis kenttä ja nappulat-->
+<head>
+<meta charset="UTF-8">
+<title>Pizzeria Baronen</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="nayta_kayttaja" style="position: fixed; top: 10px; right: 10px; font-family: Arial, sans-serif; font-size: 16px;"></div>
+        <form id="kirjautmis_lomake"> <!--kirjautumis kenttä ja nappulat-->
                 <input id="nimi" type="text" placeholder="Syötä Nimesi" value="" />
                 <input id="salasana" type="password" placeholder="Syötä Salasana" value=""/>
                 <input id="rekisteröidy_nappi" type="button" value="Rekisteröidy" onClick="rekisteröidy()" />
                 <input id="kirjaudu_ulos_nappi" type="button" value="Kirjaudu ulos" onClick="logout()" style="display: none;"/>
-            </form>
+        </form>
+    
+                <script src="scripts.js"></script>
+<header class="top-logo">
+    <img src="images/Pizzeria logo.jpg" alt="Pizza Baronen logo">
+</header>
 
-            <script src="scripts.js"></script>
-        </body>
+<h1>Pizzeria Fantasia</h1>
+
+<nav>
+    <a href="index.html">Etusivu</a>
+    <a href="menu.html">Valmiit pizzat</a>
+    <a href="fantasia.html">Kokoa oma pizza</a>
+</nav>
+
+<p>Tuoretta pizzaa joka päivä</p>
+
+<div class="container">
+    <h2>Tervetuloa!</h2>
+    <p>
+        Valitse valmis pizza klassikot tai monsteritlistalta tai tee itse oma Fantasia-pizza juuri sinun
+        haluamillasi täytteillä.
+    </p>
+</div>
+
+<h1>MIKÄ MAISTUISI TÄNÄÄN?</h1>
+
+<div class="pizza-grid">
+
+<a href="oma.html" class="pizza-card">
+<img src="Images/Luo oma.jpg" alt="Luo oma pizza">
+<h3>Luo oma pizza</h3>
+</a>
+
+<a href="klassikot.html" class="pizza-card">
+<img src="Images/lataa 11.jpg" alt="Klassikot">
+<h3>Klassikot</h3>
+</a>
+
+<a href="monsterit.html" class="pizza-card">
+<img src="Images/lataa 16.jpg" alt="Monsterit">
+<h3>Monsterit</h3>
+</a>
+
+</div>
+
+</body>
 </html>
+>>>>>>> 0b2e3eaf17f97f6b6ac4f5472b8ce1f956d99973

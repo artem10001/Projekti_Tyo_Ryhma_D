@@ -8,14 +8,15 @@
 
 <body>
     <div id="nayta_kayttaja" style="position: fixed; top: 10px; right: 10px; font-family: Arial, sans-serif; font-size: 16px;"></div>
-        <form id="kirjautmis_lomake"> <!--kirjautumis kenttä ja nappulat-->
-                <input id="nimi" type="text" placeholder="Syötä Nimesi" value="" />
-                <input id="salasana" type="password" placeholder="Syötä Salasana" value=""/>
-                <input id="rekisteröidy_nappi" type="button" value="Rekisteröidy" onClick="rekisteröidy()" />
-                <input id="kirjaudu_ulos_nappi" type="button" value="Kirjaudu ulos" onClick="logout()" style="display: none;"/>
-        </form>
+<form id="kirjautmis_lomake">
+    <input id="nimi" type="text" placeholder="Syötä Nimesi" value="" />
+    <input id="salasana" type="password" placeholder="Syötä Salasana" value=""/>
+    <input id="rekisteröidy_nappi" type="button" value="Rekisteröidy" onClick="rekisteröidy()" />
+    <input id="kirjaudu_sisään_nappi" type="button" value="Kirjaudu Sisään" onClick="login()"/>
+    <input id="kirjaudu_ulos_nappi" type="button" value="Kirjaudu ulos" onClick="logout()" style="display: none;"/>
+</form>
     
-                <script src="scripts.js"></script>
+        <script src="scripts.js"></script>
 <header class="top-logo">
     <img src="images/Pizzeria logo.jpg" alt="Pizza Baronen logo">
 </header>

@@ -1,55 +1,61 @@
 <!DOCTYPE html>
 <html lang="fi">
 <head>
-<meta charset="UTF-8">
-<title>Pizzeria Baronen</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>PizzaTown</title>
+    <link rel="stylesheet" href="visual.css">
 </head>
 
 <body>
 
-<header class="top-logo">
-    <img src="images/Pizzeria logo.jpg" alt="Pizza Baronen logo">
-</header>
+    <header class="top-logo">
+        <img src="Images/Pizza logo.png" alt="Pizza Baronen logo">
+        <h1>PizzaTown</h1>
+    </header>
 
-<h1>Pizzeria Fantasia</h1>
+    <nav>
+        <a href="Valmiit pizzat.html">Valmiit pizzat</a> 
+        <a href="index.html">Etusivu</a>
+    </nav>
 
-<nav>
-    <a href="index.html">Etusivu</a>
-    <a href="menu.html">Valmiit pizzat</a>
-    <a href="fantasia.html">Kokoa oma pizza</a>
-</nav>
+    <p>Tuoretta pizzaa joka päivä</p>
 
-<p>Tuoretta pizzaa joka päivä</p>
+    <div class="container">
+        <h2>Tervetuloa!</h2>
+        <p>
+            Valitse valmis pizza klassikot tai monsteritlistalta tai tee itse oma Fantasia-pizza juuri sinun
+            haluamillasi täytteillä.
+        </p>
+    </div>
 
-<div class="container">
-    <h2>Tervetuloa!</h2>
-    <p>
-        Valitse valmis pizza klassikot tai monsteritlistalta tai tee itse oma Fantasia-pizza juuri sinun
-        haluamillasi täytteillä.
-    </p>
-</div>
+    <h1>MIKÄ MAISTUISI TÄNÄÄN?</h1>
 
-<h1>MIKÄ MAISTUISI TÄNÄÄN?</h1>
+    <div class="menu">
+        <a href="Valmiit pizzat.html" class="pizza-card">
+            <h3>Valmiit pizzat</h3>
+            <img src="Images/Valmiit pizzat.jpg" alt="Valmiit pizzat">
+        </a>
+    </div>
 
-<div class="pizza-grid">
+    <div class="pizza-grid">
+        <a href="oma.html" class="pizza-card"> 
+            <h3>Luo oma pizza</h3>
+            <img src="Images/Luo oma.jpg" alt="Luo oma pizza">
+        </a>
 
-<a href="oma.html" class="pizza-card">
-<img src="Images/Luo oma.jpg" alt="Luo oma pizza">
-<h3>Luo oma pizza</h3>
-</a>
+        <a href="klassikot.html" class="pizza-card">
+            <h3>Klassikot</h3>
+            <img src="Images/lataa 11.jpg" alt="Klassikot">
+        </a>
 
-<a href="klassikot.html" class="pizza-card">
-<img src="Images/lataa 11.jpg" alt="Klassikot">
-<h3>Klassikot</h3>
-</a>
+        <a href="monsterit.html" class="pizza-card">
+            <h3>Monsterit</h3>
+            <img src="Images/Monster 2.jpg" alt="Monsterit">
+        </a>
+    </div>
 
-<a href="monsterit.html" class="pizza-card">
-<img src="Images/lataa 16.jpg" alt="Monsterit">
-<h3>Monsterit</h3>
-</a>
-
-</div>
+    <script src="scripts.js"></script>
 
 </body>
 </html>
+ 

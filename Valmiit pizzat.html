@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="UTF-8">
+<title>Valmiit pitsat - Pizzeria Fantasia</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f2f2f2;
+}
+
+header {
+    background: darkred;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.menu {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.pizza {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+button {
+    background: darkred;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: red;
+}
+
+.cart {
+    background: white;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+input {
+    padding: 8px;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.total {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.order-btn {
+    background: green;
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+}
+
+.back-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-button button {
+    background-color: darkred;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.back-button button:hover {
+    background-color: red;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Valmiit pitsat</h1>
+</header>
+
+<div class="menu" id="menu"></div>
+
+<div class="back-button">
+    <a href="index.html">
+        <button>Takaisin pääsivulle</button>
+    </a>
+</div>
+
+<div class="cart">
+<h2>🛒 Ostoskori</h2>
+<ul id="cartList"></ul>
+<p class="total">Yhteensä: <span id="total">0</span> €</p>
+
+<h3>📦 Tilaustiedot</h3>
+<input type="text" id="name" placeholder="Nimi">
+<input type="text" id="address" placeholder="Osoite">
+<input type="text" id="phone" placeholder="Puhelinnumero">
+
+<button class="order-btn" onclick="tilaa()">Vahvista tilaus</button>
+
+<p id="confirmation"></p>
+</div>
+
+<script>
+const pizzat = [
+["Margherita",10],["Pepperoni",11],["Kebab",12],["Hawaii",11],
+["Tonnikala",11.5],["Pollo",10],["Mexicana",10.5],["Opera",11],
+["Capricciosa",12],["Pizzatown Special",14],["BBQ Kana",12.5],["Kasvis",9],
+["Americana",11.5],["Salami",11],["Kinkku-Ananas",10],["Tuplajuusto",10]
+];
+
+let cart = [];
+
+const menu = document.getElementById("menu");
+
+pizzat.forEach((pizza, index) => {
+    menu.innerHTML += `
+    <div class="pizza">
+        <h3>${pizza[0]}</h3>
+        <p>${pizza[1]} €</p>
+        <button onclick="addToCart(${index})">Lisää</button>
+    </div>
+    `;
+});
+
+function addToCart(index){
+    const existing = cart.find(item => item.index === index);
+    if(existing){
+        existing.qty++;
+    } else {
+        cart.push({index:index, qty:1});
+    }
+    updateCart();
+}
+
+function removeFromCart(index){
+    cart = cart.filter(item => item.index !== index);
+    updateCart();
+}
+
+function changeQty(index, amount){
+    const item = cart.find(i => i.index === index);
+    if(item){
+        item.qty += amount;
+        if(item.qty <= 0){
+            removeFromCart(index);
+        }
+    }
+    updateCart();
+}
+
+function updateCart(){
+    const cartList = document.getElementById("cartList");
+    const totalSpan = document.getElementById("total");
+    cartList.innerHTML = "";
+    let total = 0;
+
+    cart.forEach(item => {
+        const pizza = pizzat[item.index];
+        total += pizza[1] * item.qty;
+
+        cartList.innerHTML += `
+        <li>
+        ${pizza[0]} (${item.qty} kpl)
+        <button onclick="changeQty(${item.index},1)">+</button>
+        <button onclick="changeQty(${item.index},-1)">−</button>
+        <button onclick="removeFromCart(${item.index})">Poista</button>
+        </li>
+        `;
+    });
+
+    totalSpan.textContent = total.toFixed(2);
+}
+
+function tilaa(){
+    const name = document.getElementById("name").value;
+    const address = document.getElementById("address").value;
+    const phone = document.getElementById("phone").value;
+
+    if(cart.length === 0){
+        alert("Ostoskori on tyhjä!");
+        return;
+    }
+
+    if(!name || !address || !phone){
+        alert("Täytä kaikki tiedot!");
+        return;
+    }
+
+    document.getElementById("confirmation").innerHTML =
+    "✅ Kiitos tilauksesta " + name + "! Pitsat toimitetaan osoitteeseen: " + address;
+
+    cart = [];
+    updateCart();
+}
+</script>
+
+</body>
+</html>

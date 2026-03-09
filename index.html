@@ -3,18 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>PizzaTown</title>
-    <link rel="stylesheet" href="visual.css">
+    <link rel="stylesheet" href="visuals.css">
 </head>
-    <div id="nayta_kayttaja" style="position: fixed; top: 10px; right: 10px; font-family: Arial, sans-serif; font-size: 16px;"></div>
-<form id="kirjautmis_lomake">
-    <input id="nimi" type="text" placeholder="Syötä Nimesi" value="" />
-    <input id="salasana" type="password" placeholder="Syötä Salasana" value=""/>
-    <input id="rekisteröidy_nappi" type="button" value="Rekisteröidy" onClick="rekisteröidy()" />
-    <input id="kirjaudu_sisään_nappi" type="button" value="Kirjaudu Sisään" onClick="login()"/>
-    <input id="kirjaudu_ulos_nappi" type="button" value="Kirjaudu ulos" onClick="logout()" style="display: none;"/>
-</form>
-
 <body>
+
+    <div id="login_container">
+        <button id="login_toggle_btn" onclick="toggleLoginPanel()">Kirjaudu sisään</button>
+
+        <div id="login_panel">
+            <h3>Kirjaudu sisään</h3>
+
+            <div id="login_fields">
+                <input id="nimi" type="text" placeholder="Käyttäjänimi" />
+                <input id="salasana" type="password" placeholder="Salasana" />
+                <button class="btn-login" onclick="login()">Kirjaudu sisään</button>
+
+                <div id="panel_message" class="panel-message"></div>
+
+                <hr class="panel-divider">
+
+                <div class="register-section">
+                    <p>Ei vielä tiliä?</p>
+                    <button class="btn-register" onclick="rekisteröidy()">Rekisteröidy</button>
+                </div>
+            </div>
+
+            <div id="logout_section">
+                <p>Olet kirjautunut sisälle, <strong id="logged_in_name"></strong>!</p>
+                <button class="btn-logout" onclick="logout()">Kirjaudu ulos</button>
+            </div>
+        </div>
+    </div>
 
     <header class="top-logo">
         <img src="Images/Pizza logo.png" alt="Pizza Baronen logo">

@@ -1,50 +1,88 @@
-function rekisteröidy() {
-    //tarkistaa että onko käyttäjällä jo olemassa oleva tili
-    if (document.getElementById("nimi").value === localStorage.getItem("nimi") && document.getElementById("salasana").value === localStorage.getItem("salasana")) {
-    alert("Sinulla on jo käyttäjä näillä tiedoilla!");
-    return;
+// Laittaa kirjautumispaneelin näkyville
+function toggleLoginPanel() {
+    const panel = document.getElementById("login_panel");
+    const isVisible = panel.style.display === "block";
+    panel.style.display = isVisible ? "none" : "block";
+    if (!isVisible) {
+        setTimeout(() => panel.classList.add("open"), 10);
+    } else {
+        panel.classList.remove("open");
     }
+}
 
-    // varmistaa että molemmat kentät on täytetty
-    if (!document.getElementById("nimi").value || !document.getElementById("salasana").value) { 
-        alert("Syötä nimi ja salasana!");
+// Sulje kirjautumispaneeli
+function closeLoginPanel() {
+    const panel = document.getElementById("login_panel");
+    panel.classList.remove("open");
+    setTimeout(() => panel.style.display = "none", 250);
+}
+
+// Rekisteröitymisfunktio, joka tallentaa käyttäjätiedot localStorageen
+function rekisteröidy() {
+    const nimi = document.getElementById("nimi").value;
+    const salasana = document.getElementById("salasana").value;
+
+    if (!nimi || !salasana) {
+        showPanelMessage("Syötä nimi ja salasana!", "error");
         return;
     }
 
-    // tallenna nimi ja salasana local storageen
-    localStorage.setItem("nimi", document.getElementById("nimi").value);
-    localStorage.setItem("salasana", document.getElementById("salasana").value);
+    if (nimi === localStorage.getItem("nimi") && salasana === localStorage.getItem("salasana")) {
+        showPanelMessage("Sinulla on jo käyttäjä näillä tiedoilla!", "error");
+        return;
+    }
 
-    // näyttää rekisteröitymisen onnistumisen
-    alert("Rekisteröityminen onnistui! Voit nyt kirjautua sisään.");
+    localStorage.setItem("nimi", nimi);
+    localStorage.setItem("salasana", salasana);
+    showPanelMessage("Rekisteröityminen onnistui! Voit nyt kirjautua sisään.", "success");
 }
 
+// Login-funktio, joka tarkistaa syötetyt tiedot ja päivittää UI:n
 function login() {
-    // tarkistaa onko syötetyt tiedot oikein ja jos on näyttää nimen ja piilottaa kirjautumis kentät ja napit
-    if (document.getElementById("nimi").value === localStorage.getItem("nimi") && document.getElementById("salasana").value === localStorage.getItem("salasana")) {
-        document.getElementById("nayta_kayttaja").textContent = "Kirjautunut: " + document.getElementById("nimi").value;
-        document.getElementById("nimi").style.display = "none";
-        document.getElementById("salasana").style.display = "none";
-        document.getElementById("kirjaudu_sisään_nappi").style.display = "none";
-        document.getElementById("rekisteröidy_nappi").style.display = "none";
-        document.getElementById("kirjaudu_ulos_nappi").style.display = "inline";
-        alert("kirjautuminen onnistui, tervetuloa " + document.getElementById("nimi").value);
+    const nimi = document.getElementById("nimi").value;
+    const salasana = document.getElementById("salasana").value;
+
+    if (nimi === localStorage.getItem("nimi") && salasana === localStorage.getItem("salasana")) {
+        document.getElementById("login_toggle_btn").textContent = nimi;
+        document.getElementById("login_toggle_btn").classList.add("logged-in");
+
+        document.getElementById("login_fields").style.display = "none";
+        document.getElementById("logout_section").style.display = "block";
+        document.getElementById("logged_in_name").textContent = nimi;
+
+        closeLoginPanel();
     } else {
-        alert("Väärä nimi tai salasana!");
+        showPanelMessage("Väärä nimi tai salasana!", "error");
     }
 }
 
+// Logout-funktio, joka poistaa käyttäjätiedot ja päivittää UI:n
 function logout() {
-    // poista kaikki käyttäjään liittyvät tiedot ja näytä kirjautumis kentät ja napit uudestaan
-    document.getElementById("nayta_kayttaja").textContent = "";
     document.getElementById("nimi").value = "";
     document.getElementById("salasana").value = "";
+    document.getElementById("login_toggle_btn").textContent = "Kirjaudu sisään";
+    document.getElementById("login_toggle_btn").classList.remove("logged-in");
 
-    document.getElementById("nimi").style.display = "inline";
-    document.getElementById("salasana").style.display = "inline";
+    document.getElementById("login_fields").style.display = "block";
+    document.getElementById("logout_section").style.display = "none";
 
-    document.getElementById("kirjaudu_ulos_nappi").style.display = "none";
-
-    document.getElementById("rekisteröidy_nappi").style.display = "inline";
-    document.getElementById("kirjaudu_sisään_nappi").style.display = "inline";
+    closeLoginPanel();
 }
+
+// Näytä viesti paneelissa, tyyppi: "success" tai "error"
+function showPanelMessage(msg, type) {
+    const el = document.getElementById("panel_message");
+    el.textContent = msg;
+    el.className = "panel-message " + type;
+    el.style.display = "block";
+    setTimeout(() => { el.style.display = "none"; }, 3500);
+}
+
+// kirjautumis menun sulku klikkaamalla muualle
+document.addEventListener("click", function(e) {
+    const panel = document.getElementById("login_panel");
+    const btn = document.getElementById("login_toggle_btn");
+    if (panel && panel.style.display === "block" && !panel.contains(e.target) && e.target !== btn) {
+        closeLoginPanel();
+    }
+});

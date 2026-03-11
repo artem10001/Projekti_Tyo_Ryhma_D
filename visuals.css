@@ -52,7 +52,9 @@ body {
 .navbar {
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: #8b0000;
+    position: relative;
 }
 
 .navbar a {
@@ -127,15 +129,14 @@ main {
 
 .back-button button:hover {
     background-color: red;
-<<<<<<< HEAD
-=======
 }
 
 /* kirjautumis nappula sekä kirjautumis menu */
 #login_container {
-    position: fixed;
-    top: 14px;
+    position: absolute;
     right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
     z-index: 1000;
     font-family: Arial, sans-serif;
 }
@@ -329,5 +330,24 @@ main {
     background: #eafaf1;
     color: #1e8449;
     border: 1px solid #a9dfbf;
->>>>>>> dd535142a70fb779b5c77104a26c9a6fb35a1b73
+}
+
+.top-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: darkred;
+    padding: 30px;
+    color: white;
+    text-align: center;
+}
+
+.top-logo img {
+    width: 120px;
+}
+
+.top-logo h1 {
+    font-size: 48px;
+    margin: 10px 0 0 0;
 }

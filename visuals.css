@@ -127,4 +127,211 @@ main {
 
 .back-button button:hover {
     background-color: red;
+<<<<<<< HEAD
+=======
+}
+
+/* ── kirjautumis nappula sekä kirjautumis menu ── */
+#login_container {
+    position: fixed;
+    top: 14px;
+    right: 18px;
+    z-index: 1000;
+    font-family: Arial, sans-serif;
+}
+
+#login_toggle_btn {
+    background: rgb(116, 0, 0);
+    color: #ffffff;
+    border: none;
+    padding: 9px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+    transition: background 0.2s, transform 0.1s;
+    white-space: nowrap;
+}
+
+#login_toggle_btn:hover {
+    background: rgb(91, 0, 0);
+    transform: translateY(-1px);
+}
+
+#login_toggle_btn.logged-in {
+    background: #2b9900;
+}
+
+#login_toggle_btn.logged-in:hover {
+    background: #207e00;
+}
+
+#login_panel {
+    display: none;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    width: 260px;
+    background: #fff;
+    border-radius: 6px;
+    border-top: 4px solid darkred;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    padding: 20px 18px 16px 18px;
+    box-sizing: border-box;
+}
+
+#login_panel.open {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#login_panel h3 {
+    margin: 0 0 14px 0;
+    font-size: 15px;
+    color: darkred;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+#login_fields input[type="text"],
+#login_fields input[type="password"] {
+    width: 100%;
+    padding: 9px 11px;
+    margin-bottom: 10px;
+    border: 1.5px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.2s;
+    outline: none;
+    background: #fff;
+    color: #333;
+}
+
+#login_fields input[type="text"]:focus,
+#login_fields input[type="password"]:focus {
+    border-color: darkred;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 10px;
+    background: darkred;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 2px;
+    transition: background 0.2s;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.btn-login:hover {
+    background: #7a0000;
+}
+
+.panel-divider {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 14px 0 12px 0;
+}
+
+.register-section {
+    text-align: center;
+}
+
+.register-section p {
+    font-size: 12px;
+    color: #999;
+    margin: 0 0 8px 0;
+}
+
+.btn-register {
+    width: 100%;
+    padding: 9px;
+    background: transparent;
+    color: darkred;
+    border: 2px solid darkred;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.btn-register:hover {
+    background: darkred;
+    color: #fff;
+}
+
+#logout_section {
+    display: none;
+    text-align: center;
+}
+
+#logout_section p {
+    font-size: 14px;
+    color: #333;
+    margin: 0 0 14px 0;
+}
+
+#logout_section strong {
+    color: darkred;
+}
+
+.btn-logout {
+    width: 100%;
+    padding: 9px;
+    background: transparent;
+    color: #aaa;
+    border: 1.5px solid #ddd;
+    border-radius: 5px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.btn-logout:hover {
+    background: #f5f5f5;
+    color: #555;
+    border-color: #bbb;
+}
+
+.panel-message {
+    display: none;
+    font-size: 12px;
+    border-radius: 4px;
+    padding: 7px 10px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.panel-message.error {
+    background: #fdecea;
+    color: darkred;
+    border: 1px solid #c0392b;
+}
+
+.panel-message.success {
+    background: #eafaf1;
+    color: #1e8449;
+    border: 1px solid #a9dfbf;
+>>>>>>> dd535142a70fb779b5c77104a26c9a6fb35a1b73
 }

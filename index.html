@@ -6,6 +6,7 @@
     <title>PizzaTown</title>
     <link rel="stylesheet" href="visuals.css">
 </head>
+<<<<<<< HEAD
 
 <body>
 
@@ -24,6 +25,40 @@
 
     <header class="header">
         <img src="Images/Pizza logo.png" alt="PizzaTown logo" class="logo">
+=======
+<body>
+
+    <div id="login_container">
+        <button id="login_toggle_btn" onclick="toggleLoginPanel()">Kirjaudu sisään</button>
+
+        <div id="login_panel">
+            <h3>Kirjaudu sisään</h3>
+
+            <div id="login_fields">
+                <input id="nimi" type="text" placeholder="Käyttäjänimi" />
+                <input id="salasana" type="password" placeholder="Salasana" />
+                <button class="btn-login" onclick="login()">Kirjaudu sisään</button>
+
+                <div id="panel_message" class="panel-message"></div>
+
+                <hr class="panel-divider">
+
+                <div class="register-section">
+                    <p>Ei vielä tiliä?</p>
+                    <button class="btn-register" onclick="rekisteröidy()">Rekisteröidy</button>
+                </div>
+            </div>
+
+            <div id="logout_section">
+                <p>Olet kirjautunut sisälle, <strong id="logged_in_name"></strong>!</p>
+                <button class="btn-logout" onclick="logout()">Kirjaudu ulos</button>
+            </div>
+        </div>
+    </div>
+
+    <header class="top-logo">
+        <img src="Images/Pizza logo.png" alt="Pizza Baronen logo">
+>>>>>>> dd535142a70fb779b5c77104a26c9a6fb35a1b73
         <h1>PizzaTown</h1>
         <p class="slogan">Tuoretta pizzaa joka päivä</p>
     </header>

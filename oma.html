@@ -2,130 +2,279 @@
 <html lang="fi">
 <head>
 <meta charset="UTF-8">
-<title>Luo oma pizza - Pizzeria Fantasia</title>
+<title>PizzaTown Fantasia Pizza</title>
+
 <style>
-body { font-family: Arial; background:#f4f4f4; margin:0; padding:20px; }
-h1 { text-align:center; }
 
-.form-container { 
-  background:white; 
-  padding:20px; 
-  width:60%; 
-  margin:auto; 
-  border-radius:10px; 
-  box-shadow:0 0 10px rgba(0,0,0,0.1); 
+body{
+font-family:Arial,sans-serif;
+background:#fff3e6;
+margin:0;
 }
 
-button { 
-  background:#b22222; 
-  color:white; 
-  padding:10px 15px; 
-  border:none; 
-  border-radius:5px; 
-  cursor:pointer; 
+header{
+background:#b22222;
+color:white;
+text-align:center;
+padding:20px;
+font-size:28px;
+font-weight:bold;
 }
 
-button:hover { background:#8b0000; }
-
-.back { text-align:center; margin-top:20px; }
-
-/* Popup */
-.modal {
-  display:none;
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.5);
+.logo{
+width:120px;
+display:block;
+margin:0 auto 10px auto;
 }
 
-.modal-content {
-  background:white;
-  padding:20px;
-  width:40%;
-  margin:10% auto;
-  border-radius:10px;
-  text-align:center;
+.container{
+background:white;
+padding:25px;
+width:420px;
+margin:30px auto;
+border-radius:10px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
 }
 
-.success {
-  color:green;
-  font-weight:bold;
-  margin-top:10px;
+h2{text-align:center;color:#b22222;}
+
+h3{
+margin-top:20px;
+color:#444;
+border-bottom:2px solid #eee;
+padding-bottom:5px;
 }
+
+label{
+display:block;
+margin:6px 0;
+cursor:pointer;
+}
+
+button{
+background:#b22222;
+color:white;
+border:none;
+padding:10px 15px;
+border-radius:5px;
+font-size:14px;
+cursor:pointer;
+margin-top:10px;
+}
+
+button:hover{background:#8b0000;}
+
+.error{
+color:red;
+font-size:13px;
+margin-top:5px;
+}
+
+.total{
+margin-top:15px;
+font-weight:bold;
+font-size:18px;
+color:#b22222;
+text-align:center;
+}
+
+.modal{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.6);
+}
+
+.modal-content{
+background:white;
+width:350px;
+margin:120px auto;
+padding:20px;
+border-radius:10px;
+text-align:center;
+}
+
+#vahvistus{
+color:green;
+font-weight:bold;
+margin-top:10px;
+}
+
 </style>
 </head>
+
 <body>
 
-<h1>🍕 Luo oma pizza</h1>
+<header>
+<img src="Images/Pizza logo.png" class="logo">
+PizzaTown
+</header>
 
-<div class="form-container">
-<form id="pizzaForm">
+<div class="container">
 
-<label>Valitse koko:</label><br>
-<input type="radio" name="koko" value="Normaali" required> Normaali (8€)<br>
-<input type="radio" name="koko" value="Perhe"> Perhe (12€)<br><br>
+<a href="index.html"><button style="margin-bottom:10px;">&#8592; Takaisin pääsivulle</button></a>
 
-<label>Valitse täytteet (+1€/kpl):</label><br>
-<input type="checkbox" value="Kinkku"> Kinkku<br>
-<input type="checkbox" value="Pepperoni"> Pepperoni<br>
-<input type="checkbox" value="Kana"> Kana<br>
-<input type="checkbox" value="Ananas"> Ananas<br>
-<input type="checkbox" value="Aurajuusto"> Aurajuusto<br>
-<input type="checkbox" value="Jalapeno"> Jalapeno<br><br>
+<h2>Luo fantasia-pizza</h2>
 
-<button type="submit">Tilaa pizza</button>
-</form>
+<h3>Pohja</h3>
+<label><input type="radio" name="pohja" value="Normaali" data-price="0" checked> Normaali</label>
+<label><input type="radio" name="pohja" value="Gluteeniton" data-price="2"> Gluteeniton (+2€)</label>
+
+<h3>Kastike</h3>
+<label><input type="radio" name="kastike" value="Tomaattikastike" data-price="0" checked> Tomaattikastike</label>
+<label><input type="radio" name="kastike" value="Tomaattikastike + valkosipuli" data-price="0"> Tomaattikastike + valkosipuli</label>
+
+<h3>Täytteet (3–5)</h3>
+
+<label><input type="checkbox" name="tayte" data-price="1.5" value="Kinkku"> Kinkku (+1.5€)</label>
+<label><input type="checkbox" name="tayte" data-price="1.5" value="Pepperoni"> Pepperoni (+1.5€)</label>
+<label><input type="checkbox" name="tayte" data-price="1.5" value="Kana"> Kana (+1.5€)</label>
+<label><input type="checkbox" name="tayte" data-price="2.5" value="Parmankinkku"> Parmankinkku (+2.5€)</label>
+<label><input type="checkbox" name="tayte" data-price="1" value="Ananas"> Ananas (+1€)</label>
+<label><input type="checkbox" name="tayte" data-price="1" value="Sienet"> Sienet (+1€)</label>
+<label><input type="checkbox" name="tayte" data-price="1" value="Oliivit"> Oliivit (+1€)</label>
+<label><input type="checkbox" name="tayte" data-price="1" value="Punasipuli"> Punasipuli (+1€)</label>
+<label><input type="checkbox" name="tayte" data-price="2" value="Aurajuusto"> Aurajuusto (+2€)</label>
+<label><input type="checkbox" name="tayte" data-price="1" value="Jalapeño"> Jalapeño (+1€)</label>
+
+<div class="error" id="error"></div>
+
+<h3>Juusto</h3>
+<label><input type="radio" name="juusto" value="Mozzarella" data-price="0" checked> Mozzarella</label>
+<label><input type="radio" name="juusto" value="Sissi juusto" data-price="2"> Sissi juusto (+2€)</label>
+
+<div class="total">
+Hinta: <span id="totalPrice">9.00</span> €
 </div>
 
-<div id="orderModal" class="modal">
-  <div class="modal-content">
-    <h2>Tilauksesi</h2>
-    <p id="orderSummary"></p>
-    <h3 id="totalPrice"></h3>
-    <button onclick="confirmOrder()">Vahvista tilaus</button>
-    <button onclick="closeModal()">Peruuta</button>
-    <p id="successMessage" class="success"></p>
-  </div>
+<br>
+<button onclick="hyvaksyPizza()">Hyväksy pizza</button>
+
 </div>
 
-<div class="back">
-<a href="index.html">⬅ Takaisin etusivulle</a>
+<div id="popup" class="modal">
+<div class="modal-content">
+
+<h3>Tarkista tilaus</h3>
+<div id="popup-yhteenveto"></div>
+
+<h3>Toimitustapa</h3>
+
+<label><input type="radio" name="delivery" value="nouto" onclick="naytaOsoite()"> Nouto</label>
+<label><input type="radio" name="delivery" value="kuljetus" onclick="naytaOsoite()"> Kuljetus</label>
+
+<div id="osoiteKentta"></div>
+
+<br>
+<button onclick="vahvistaTilaus()">Vahvista tilaus</button>
+<button onclick="suljePopup()">Peruuta</button>
+
+<p id="vahvistus"></p>
+
+</div>
 </div>
 
 <script>
-let currentTotal = 0;
 
-document.getElementById("pizzaForm").addEventListener("submit", function(e){
-  e.preventDefault();
+const basePrice = 9;
 
-  let koko = document.querySelector('input[name="koko"]:checked');
-  let taytteet = document.querySelectorAll('input[type="checkbox"]:checked');
+function calculatePrice(){
 
-  let tayteLista = [];
-  taytteet.forEach(t => tayteLista.push(t.value));
+let total = basePrice;
 
-  let perusHinta = koko.value === "Normaali" ? 8 : 12;
-  let tayteHinta = tayteLista.length * 1;
-  currentTotal = perusHinta + tayteHinta;
-
-  let yhteenveto = "Koko: " + koko.value + "<br>";
-  yhteenveto += "Täytteet: " + (tayteLista.length > 0 ? tayteLista.join(", ") : "Ei täytteitä");
-
-  document.getElementById("orderSummary").innerHTML = yhteenveto;
-  document.getElementById("totalPrice").innerHTML = "Yhteensä: " + currentTotal + " €";
-  document.getElementById("orderModal").style.display = "block";
+document.querySelectorAll("input:checked").forEach(el=>{
+if(el.dataset.price){
+total += Number(el.dataset.price);
+}
 });
 
-function closeModal(){
-  document.getElementById("orderModal").style.display = "none";
-  document.getElementById("successMessage").innerHTML = "";
+document.getElementById("totalPrice").textContent = total.toFixed(2);
 }
 
-function confirmOrder(){
-  document.getElementById("successMessage").innerHTML = "✅ Tilaus onnistui! Kiitos tilauksesta.";
+document.querySelectorAll('input[name="tayte"]').forEach(el=>{
+el.addEventListener("change",checkToppings);
+});
+
+document.querySelectorAll('input[type="radio"]').forEach(el=>{
+el.addEventListener("change",calculatePrice);
+});
+
+function checkToppings(){
+
+let checked = document.querySelectorAll('input[name="tayte"]:checked');
+
+if(checked.length > 5){
+this.checked = false;
+document.getElementById("error").textContent = "Voit valita enintään 5 täytettä.";
 }
+else{
+document.getElementById("error").textContent = "";
+}
+
+calculatePrice();
+
+}
+
+function hyvaksyPizza(){
+
+let toppings=document.querySelectorAll('input[name="tayte"]:checked');
+
+if(toppings.length<3||toppings.length>5){
+document.getElementById("error").textContent="Valitse 3–5 täytettä.";
+return;
+}
+
+document.getElementById("error").textContent="";
+
+let pohja=document.querySelector('input[name="pohja"]:checked').value;
+let kastike=document.querySelector('input[name="kastike"]:checked').value;
+let juusto=document.querySelector('input[name="juusto"]:checked').value;
+
+let lista=[];
+toppings.forEach(t=>lista.push(t.value));
+
+let summary=
+"Pohja: "+pohja+"<br>"+
+"Kastike: "+kastike+"<br>"+
+"Täytteet: "+lista.join(", ")+"<br>"+
+"Juusto: "+juusto+"<br>"+
+"Hinta: "+document.getElementById("totalPrice").textContent+" €";
+
+document.getElementById("popup-yhteenveto").innerHTML=summary;
+document.getElementById("popup").style.display="block";
+
+}
+
+function naytaOsoite(){
+
+let type=document.querySelector('input[name="delivery"]:checked').value;
+
+document.getElementById("osoiteKentta").innerHTML=
+type==="kuljetus"?"Osoite: <input type='text' id='address'>":"";
+
+}
+
+function vahvistaTilaus(){
+
+let pohja=document.querySelector('input[name="pohja"]:checked').value;
+let toppings=document.querySelectorAll('input[name="tayte"]:checked');
+
+let time=7;
+if(pohja==="Gluteeniton") time+=3;
+time+=toppings.length;
+
+document.getElementById("vahvistus").innerHTML=
+"Tilaus vahvistettu!<br>Arvioitu valmistusaika: "+time+" minuuttia.";
+
+}
+
+function suljePopup(){
+document.getElementById("popup").style.display="none";
+}
+
 </script>
 
 </body>

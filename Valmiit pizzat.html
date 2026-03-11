@@ -89,6 +89,11 @@ input {
 .back-button button:hover {
     background-color: red;
 }
+
+.toppings {
+    text-align: left;
+    margin-bottom: 10px;
+}
 </style>
 </head>
 
@@ -129,27 +134,70 @@ const pizzat = [
 ["Americana",11.5],["Salami",11],["Kinkku-Ananas",10],["Tuplajuusto",10]
 ];
 
+const toppings = [
+    ["Extra juusto", 1.0],
+    ["Pepperoni", 1.5],
+    ["Kebab", 1.5],
+    ["Paprika", 0.5],
+    ["Sieni", 0.5],
+    ["Ananas", 0.7],
+    ["Tonnikala", 1.2]
+];
+
 let cart = [];
+let selectedToppings = {}; 
 
 const menu = document.getElementById("menu");
 
 pizzat.forEach((pizza, index) => {
+    let toppingsOptions = toppings.map((topping, tIndex) =>
+        `<label>
+            <input type="checkbox" data-pizza="${index}" data-topping="${tIndex}" onchange="updateTopping(this)">
+            ${topping[0]} (+${topping[1]} €)
+        </label><br>`
+    ).join("");
+
     menu.innerHTML += `
     <div class="pizza">
         <h3>${pizza[0]}</h3>
         <p>${pizza[1]} €</p>
+        <div class="toppings">
+            ${toppingsOptions}
+        </div>
         <button onclick="addToCart(${index})">Lisää</button>
     </div>
     `;
 });
 
+function updateTopping(checkbox){
+    const pizzaIndex = parseInt(checkbox.dataset.pizza);
+    const toppingIndex = parseInt(checkbox.dataset.topping);
+
+    if(!selectedToppings[pizzaIndex]) selectedToppings[pizzaIndex] = [];
+
+    if(checkbox.checked){
+        selectedToppings[pizzaIndex].push(toppingIndex);
+    } else {
+        selectedToppings[pizzaIndex] = selectedToppings[pizzaIndex].filter(i => i !== toppingIndex);
+    }
+}
+
 function addToCart(index){
-    const existing = cart.find(item => item.index === index);
+    const existing = cart.find(item => item.index === index && JSON.stringify(item.toppings) === JSON.stringify(selectedToppings[index] || []));
     if(existing){
         existing.qty++;
     } else {
-        cart.push({index:index, qty:1});
+        cart.push({index:index, qty:1, toppings: selectedToppings[index] ? [...selectedToppings[index]] : []});
     }
+
+    // Tyhjennetään valinnat
+    if(selectedToppings[index]) {
+        selectedToppings[index].forEach(tIndex => {
+            document.querySelector(`input[data-pizza="${index}"][data-topping="${tIndex}"]`).checked = false;
+        });
+    }
+    selectedToppings[index] = [];
+
     updateCart();
 }
 
@@ -177,11 +225,22 @@ function updateCart(){
 
     cart.forEach(item => {
         const pizza = pizzat[item.index];
-        total += pizza[1] * item.qty;
+        let toppingsText = "";
+        let toppingsTotal = 0;
+
+        if(item.toppings.length > 0){
+            toppingsText = " + ";
+            toppingsText += item.toppings.map(tIndex => {
+                toppingsTotal += toppings[tIndex][1];
+                return toppings[tIndex][0];
+            }).join(", ");
+        }
+
+        total += (pizza[1] + toppingsTotal) * item.qty;
 
         cartList.innerHTML += `
         <li>
-        ${pizza[0]} (${item.qty} kpl)
+        ${pizza[0]}${toppingsText} (${item.qty} kpl)
         <button onclick="changeQty(${item.index},1)">+</button>
         <button onclick="changeQty(${item.index},-1)">−</button>
         <button onclick="removeFromCart(${item.index})">Poista</button>

@@ -1,10 +1,31 @@
 <!DOCTYPE html>
 <html lang="fi">
+
 <head>
     <meta charset="UTF-8">
     <title>PizzaTown</title>
     <link rel="stylesheet" href="visuals.css">
 </head>
+<<<<<<< HEAD
+
+<body>
+
+    <div class="login-bar">
+        <div id="nayta_kayttaja"></div>
+
+        <form id="kirjautmis_lomake">
+            <input id="nimi" type="text" placeholder="Syötä Nimesi">
+            <input id="salasana" type="password" placeholder="Syötä Salasana">
+
+            <input id="rekisteröidy_nappi" type="button" value="Rekisteröidy" onclick="rekisteröidy()">
+            <input id="kirjaudu_sisään_nappi" type="button" value="Kirjaudu Sisään" onclick="login()">
+            <input id="kirjaudu_ulos_nappi" type="button" value="Kirjaudu ulos" onclick="logout()" style="display:none;">
+        </form>
+    </div>
+
+    <header class="header">
+        <img src="Images/Pizza logo.png" alt="PizzaTown logo" class="logo">
+=======
 <body>
 
     <div id="login_container">
@@ -37,54 +58,55 @@
 
     <header class="top-logo">
         <img src="Images/Pizza logo.png" alt="Pizza Baronen logo">
+>>>>>>> dd535142a70fb779b5c77104a26c9a6fb35a1b73
         <h1>PizzaTown</h1>
+        <p class="slogan">Tuoretta pizzaa joka päivä</p>
     </header>
 
-    <nav>
-        <a href="index.html">Etusivu</a>        
-        <a href="Valmiit pizzat.html">Valmiit pizzat</a> 
+    <nav class="navbar">
+        <a href="index.html">Etusivu</a>
+        <a href="Valmiit pizzat.html">Valmiit pizzat</a>
         <a href="oma.html">Luo oma pizza</a>
         <a href="klassikot.html">Klassikot</a>
-        <a href="monsterit.html">Monsterit</a>
     </nav>
 
-    <p>Tuoretta pizzaa joka päivä</p>
+    <main>
 
-    <div class="container">
-        <h2>Tervetuloa!</h2>
-        <p>
-            Valitse valmis pizza klassikot tai monsteritlistalta tai tee itse oma Fantasia-pizza juuri sinun
-            haluamillasi täytteillä.
-        </p>
-    </div>
+        <section class="welcome">
+            <h2>Tervetuloa!</h2>
+            <p>
+                Valitse valmis pizza klassikkolistalta tai tee oma Fantasia-pizza
+                juuri sinun haluamillasi täytteillä.
+            </p>
+        </section>
 
-    <h1>MIKÄ MAISTUISI TÄNÄÄN?</h1>
+        <section class="menu-section">
+            <h2>MIKÄ MAISTUISI TÄNÄÄN?</h2>
 
-    <div class="menu">
-        <a href="Valmiit pizzat.html" class="pizza-card">
-            <h3>Valmiit pizzat</h3>
-            <img src="Images/Valmiit pizzat.jpg" alt="Valmiit pizzat">
-        </a>
-    </div>
+            <div class="pizza-grid">
 
-    <div class="pizza-grid">
-        <a href="oma.html" class="pizza-card"> 
-            <h3>Luo oma pizza</h3>
-            <img src="Images/Luo oma.jpg" alt="Luo oma pizza">
-        </a>
+                <a href="Valmiit pizzat.html" class="pizza-card">
+                    <img src="Images/Valmiit pizzat.jpg" alt="Valmiit pizzat">
+                    <h3>Valmiit pizzat</h3>
+                </a>
 
-        <a href="klassikot.html" class="pizza-card">
-            <h3>Klassikot</h3>
-            <img src="Images/lataa 11.jpg" alt="Klassikot">
-        </a>
+                <a href="oma.html" class="pizza-card">
+                    <img src="Images/Luo oma.jpg" alt="Luo oma pizza">
+                    <h3>Luo oma pizza</h3>
+                </a>
 
-        <a href="monsterit.html" class="pizza-card">
-            <h3>Monsterit</h3>
-            <img src="Images/Monster 2.jpg" alt="Monsterit">
-        </a>
-    </div>
+                <a href="klassikot.html" class="pizza-card">
+                    <img src="Images/lataa 11.jpg" alt="Klassikot">
+                    <h3>Klassikot</h3>
+                </a>
+
+            </div>
+        </section>
+
+    </main>
 
     <script src="scripts.js"></script>
 
 </body>
+
 </html>

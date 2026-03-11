@@ -6,42 +6,194 @@
 <style>
 body { font-family: Arial; background:#f4f4f4; margin:0; padding:20px; }
 h1 { text-align:center; }
-.pizza { background:white; padding:15px; margin:15px auto; width:60%; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.1); }
+.menu { display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:20px; }
+.pizza { background:white; padding:15px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.1); text-align:center; }
+.pizza img { width:100%; border-radius:10px; }
+.toppings { text-align:left; margin:10px 0; }
+button { background:#b22222; color:white; border:none; padding:8px 12px; border-radius:5px; cursor:pointer; }
+button:hover { background:red; }
+.cart { background:white; padding:20px; margin:20px 0; border-radius:10px; }
+.total { font-weight:bold; font-size:18px; }
+.order-btn { background:green; width:100%; padding:12px; font-size:16px; color:white; border:none; border-radius:5px; cursor:pointer; }
+.order-btn:hover { background:darkgreen; }
 .back { text-align:center; margin-top:30px; }
 a { text-decoration:none; color:#b22222; font-weight:bold; }
+input { padding:8px; width:100%; margin-bottom:10px; }
 </style>
 </head>
 <body>
 
 <h1>🍕 Klassikot</h1>
 
-<div class="pizza">
-<h2>Lihamestari</h2>
-<p>Kinkku, paahdettu pekoni, kebabliha, pepperonimakkara, naudanjauheliha</p>
-<img src="Images/Lihamestari.jpg" alt="Texas Monster">
-<p><strong>14,90€</strong></p>
-<button type="submit">Tilaa pizza</button>
-</div>
+<div class="menu" id="menu"></div>
 
-<div class="pizza">
-<h2>Opera Special</h2>
-<p>Tonnikala, kinkku, salami</p>
- <img src="images/Opera special.jpg" alt="Pizza Baronen logo">
-<p><strong>13,20€</strong></p>
-<button type="submit">Tilaa pizza</button>
-</div>
+<div class="cart">
+<h2>🛒 Ostoskori</h2>
+<ul id="cartList"></ul>
+<p class="total">Yhteensä: <span id="total">0</span> €</p>
 
-<div class="pizza">
-<h2>Americana</h2>
-<p>Kinkku, ananas, aura-sinihomejuusto</p>
-<img src="Images/Americana.jpg" alt="New jersey pizza">
-<p><strong>12,40€</strong></p>
-<button type="submit">Tilaa pizza</button>
+<h3>📦 Tilaustiedot</h3>
+<input type="text" id="name" placeholder="Nimi">
+<input type="text" id="address" placeholder="Osoite">
+<input type="text" id="phone" placeholder="Puhelinnumero">
+
+<button class="order-btn" onclick="tilaa()">Vahvista tilaus</button>
+
+<p id="confirmation"></p>
 </div>
 
 <div class="back">
 <a href="index.html">⬅ Takaisin etusivulle</a>
 </div>
+
+<script>
+
+const pizzat = [
+    ["Lihamestari",14.9,"Images/Lihamestari.jpg","Kinkku, paahdettu pekoni, kebabliha, pepperonimakkara, naudanjauheliha"],
+    ["Opera Special",13.2,"Images/Opera special.jpg","Tonnikala, kinkku, salami"],
+    ["Americana",12.4,"Images/Americana.jpg","Kinkku, ananas, aura-sinihomejuusto"]
+];
+
+const toppings = [
+    ["Extra juusto",1.0],
+    ["Pepperoni",1.5],
+    ["Kebab",1.5],
+    ["Paprika",0.5],
+    ["Sieni",0.5],
+    ["Ananas",0.7],
+    ["Tonnikala",1.2]
+];
+
+let cart = [];
+let selectedToppings = {};
+
+const menu = document.getElementById("menu");
+
+pizzat.forEach((pizza, index) => {
+    let toppingsOptions = toppings.map((topping, tIndex) =>
+        `<label>
+            <input type="checkbox" data-pizza="${index}" data-topping="${tIndex}" onchange="updateTopping(this)">
+            ${topping[0]} (+${topping[1]} €)
+        </label><br>`
+    ).join("");
+
+    menu.innerHTML += `
+    <div class="pizza">
+        <h2>${pizza[0]}</h2>
+        <img src="${pizza[2]}" alt="${pizza[0]}">
+        <p>${pizza[3]}</p>
+        <p><strong>${pizza[1].toFixed(2)}€</strong></p>
+        <div class="toppings">
+            ${toppingsOptions}
+        </div>
+        <button onclick="addToCart(${index})">Lisää ostoskoriin</button>
+    </div>
+    `;
+});
+
+function updateTopping(checkbox){
+    const pizzaIndex = parseInt(checkbox.dataset.pizza);
+    const toppingIndex = parseInt(checkbox.dataset.topping);
+
+    if(!selectedToppings[pizzaIndex]) selectedToppings[pizzaIndex] = [];
+
+    if(checkbox.checked){
+        selectedToppings[pizzaIndex].push(toppingIndex);
+    } else {
+        selectedToppings[pizzaIndex] = selectedToppings[pizzaIndex].filter(i => i !== toppingIndex);
+    }
+}
+
+function addToCart(index){
+    const existing = cart.find(item => item.index === index && JSON.stringify(item.toppings) === JSON.stringify(selectedToppings[index] || []));
+    if(existing){
+        existing.qty++;
+    } else {
+        cart.push({index:index, qty:1, toppings: selectedToppings[index] ? [...selectedToppings[index]] : []});
+    }
+
+    if(selectedToppings[index]){
+        selectedToppings[index].forEach(tIndex => {
+            document.querySelector(`input[data-pizza="${index}"][data-topping="${tIndex}"]`).checked = false;
+        });
+    }
+    selectedToppings[index] = [];
+
+    updateCart();
+}
+
+function removeFromCart(index){
+    cart = cart.filter(item => item.index !== index);
+    updateCart();
+}
+
+function changeQty(index, amount){
+    const item = cart.find(i => i.index === index);
+    if(item){
+        item.qty += amount;
+        if(item.qty <= 0){
+            removeFromCart(index);
+        }
+    }
+    updateCart();
+}
+
+function updateCart(){
+    const cartList = document.getElementById("cartList");
+    const totalSpan = document.getElementById("total");
+    cartList.innerHTML = "";
+    let total = 0;
+
+    cart.forEach(item => {
+        const pizza = pizzat[item.index];
+        let toppingsText = "";
+        let toppingsTotal = 0;
+
+        if(item.toppings.length > 0){
+            toppingsText = " + ";
+            toppingsText += item.toppings.map(tIndex => {
+                toppingsTotal += toppings[tIndex][1];
+                return toppings[tIndex][0];
+            }).join(", ");
+        }
+
+        total += (pizza[1] + toppingsTotal) * item.qty;
+
+        cartList.innerHTML += `
+        <li>
+        ${pizza[0]}${toppingsText} (${item.qty} kpl)
+        <button onclick="changeQty(${item.index},1)">+</button>
+        <button onclick="changeQty(${item.index},-1)">−</button>
+        <button onclick="removeFromCart(${item.index})">Poista</button>
+        </li>
+        `;
+    });
+
+    totalSpan.textContent = total.toFixed(2);
+}
+
+function tilaa(){
+    const name = document.getElementById("name").value;
+    const address = document.getElementById("address").value;
+    const phone = document.getElementById("phone").value;
+
+    if(cart.length === 0){
+        alert("Ostoskori on tyhjä!");
+        return;
+    }
+
+    if(!name || !address || !phone){
+        alert("Täytä kaikki tiedot!");
+        return;
+    }
+
+    document.getElementById("confirmation").innerHTML =
+    "✅ Kiitos tilauksesta " + name + "! Pizzat toimitetaan osoitteeseen: " + address;
+
+    cart = [];
+    updateCart();
+}
+</script>
 
 </body>
 </html>

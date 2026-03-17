@@ -11,7 +11,7 @@ a {
 }
 
 .top-logo, .header {
-    position: relative; /* TÄRKEÄ */
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -54,12 +54,6 @@ a {
 
 .navbar a:hover {
     background-color: red;
-}
-
-main {
-    max-width: 1200px;
-    margin: auto;
-    padding: 40px 20px;
 }
 
 .welcome {

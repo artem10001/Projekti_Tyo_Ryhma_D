@@ -36,7 +36,7 @@ function rekisteröidy() {
     localStorage.setItem("nimi", nimi);
     localStorage.setItem("salasana", salasana);
 
-    // AUTOMAATTINEN KIRJAUTUMINEN
+    //automaattinen kirjautuminen
     document.getElementById("login_toggle_btn").textContent = nimi;
     document.getElementById("login_toggle_btn").classList.add("logged-in");
 

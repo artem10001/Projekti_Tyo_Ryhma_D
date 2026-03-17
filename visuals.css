@@ -250,6 +250,11 @@ a {
     margin-left: 4px;
     margin-top: 5px;
     cursor: pointer;
+<<<<<<< HEAD
+=======
+    letter-spacing: 1px;
+    text-transform: uppercase;
+>>>>>>> 84c56925b7d1eda80994ee588ff753347d16c458
 }
 
 .drink-btn {

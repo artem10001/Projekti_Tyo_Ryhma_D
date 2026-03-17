@@ -5,6 +5,7 @@
 <title>Klassikot - PizzaTown</title>
 
 <style>
+<<<<<<< HEAD
 body{
     font-family:Arial;
     background:#f4f4f4;
@@ -63,20 +64,34 @@ a{
     color:#b22222;
     font-weight:bold;
 }
+=======
+body { font-family: Arial; background:#f4f4f4; margin:0; padding:20px; }
+h1 { text-align:center; }
+.menu { display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:20px; }
+.pizza { background:white; padding:15px; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.1); text-align:center; }
+.pizza img { width:100%; border-radius:10px; }
+.toppings { text-align:left; margin:10px 0; }
+button { background:#b22222; color:white; border:none; padding:8px 12px; border-radius:5px; cursor:pointer; }
+button:hover { background:red; }
+.back { text-align:center; margin-top:30px; }
+a { text-decoration:none; color:#b22222; font-weight:bold; }
+input { padding:8px; width:100%; margin-bottom:10px; }
+>>>>>>> 84c56925b7d1eda80994ee588ff753347d16c458
 </style>
 </head>
 
 <body>
 
 <h1>🍕 Klassikot</h1>
-
 <div class="menu" id="menu"></div>
 
 <div class="back">
 <a href="index.html">⬅ Takaisin etusivulle</a>
 </div>
 
+<script src="cart.js"></script>
 <script>
+<<<<<<< HEAD
 const pizzat=[
 ["Lihamestari",14.9,"Images/Lihamestari.jpg","Kinkku, paahdettu pekoni, kebabliha, pepperonimakkara, naudanjauheliha"],
 ["Opera Special",13.2,"Images/Opera special.jpg","Tonnikala, kinkku, salami"],
@@ -132,7 +147,69 @@ function updateTopping(checkbox){
         selectedToppings[pizzaIndex]=selectedToppings[pizzaIndex].filter(i=>i!==toppingIndex);
     }
 }
-</script>
+=======
+const pizzat = [
+  ["Lihamestari",14.9,"Images/Lihamestari.jpg","Kinkku, paahdettu pekoni, kebabliha, pepperonimakkara, naudanjauheliha"],
+  ["Opera Special",13.2,"Images/Opera special.jpg","Tonnikala, kinkku, salami"],
+  ["Americana",12.4,"Images/Americana.jpg","Kinkku, ananas, aura-sinihomejuusto"]
+];
 
+const toppings = [
+  ["Extra juusto",1.0],["Pepperoni",1.5],["Kebab",1.5],
+  ["Paprika",0.5],["Sieni",0.5],["Ananas",0.7],["Tonnikala",1.2]
+];
+
+let selectedToppings = {};
+const menu = document.getElementById("menu");
+
+pizzat.forEach((pizza, index) => {
+  let toppingsOptions = toppings.map((topping, tIndex) =>
+    `<label><input type="checkbox" data-pizza="${index}" data-topping="${tIndex}" onchange="updateTopping(this)">
+    ${topping[0]} (+${topping[1]} €)</label><br>`
+  ).join("");
+  menu.innerHTML += `
+  <div class="pizza">
+    <h2>${pizza[0]}</h2>
+    <img src="${pizza[2]}" alt="${pizza[0]}">
+    <p>${pizza[3]}</p>
+    <p><strong>${pizza[1].toFixed(2)}€</strong></p>
+    <div class="toppings">${toppingsOptions}</div>
+    <button onclick="addToCart(${index})">Lisää ostoskoriin</button>
+  </div>`;
+});
+
+function updateTopping(checkbox){
+  const pizzaIndex = parseInt(checkbox.dataset.pizza);
+  const toppingIndex = parseInt(checkbox.dataset.topping);
+  if(!selectedToppings[pizzaIndex]) selectedToppings[pizzaIndex] = [];
+  if(checkbox.checked){
+    selectedToppings[pizzaIndex].push(toppingIndex);
+  } else {
+    selectedToppings[pizzaIndex] = selectedToppings[pizzaIndex].filter(i => i !== toppingIndex);
+  }
+}
+
+function addToCart(index){
+  const pizza = pizzat[index];
+  let toppingsText = "";
+  let toppingsTotal = 0;
+  if(selectedToppings[index] && selectedToppings[index].length > 0){
+    toppingsText = selectedToppings[index].map(tIndex => {
+      toppingsTotal += toppings[tIndex][1];
+      return toppings[tIndex][0];
+    }).join(", ");
+  }
+  const price = pizza[1] + toppingsTotal;
+  const details = toppingsText ? "Lisätäytteet: " + toppingsText : "";
+  Cart.addItem(pizza[0], price, details);
+  if(selectedToppings[index]){
+    selectedToppings[index].forEach(tIndex => {
+      document.querySelector(`input[data-pizza="${index}"][data-topping="${tIndex}"]`).checked = false;
+    });
+  }
+  selectedToppings[index] = [];
+}
+>>>>>>> 84c56925b7d1eda80994ee588ff753347d16c458
+</script>
 </body>
 </html>

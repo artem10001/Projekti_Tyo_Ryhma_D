@@ -2,6 +2,7 @@
 <html lang="fi">
 <head>
 <meta charset="UTF-8">
+<<<<<<< HEAD
 <title>Klassikot - PizzaTown</title>
 
 <style>
@@ -104,26 +105,63 @@ border-radius:10px;
 text-align:center;
 }
 
+=======
+<title>PizzaTown Fantasia Pizza</title>
+<style>
+body { font-family:Arial,sans-serif; background:#fff3e6; margin:0; }
+header { background:#b22222; color:white; text-align:center; padding:20px; font-size:28px; font-weight:bold; }
+.logo { width:120px; display:block; margin:0 auto 10px auto; }
+button:hover { background:#8b0000; }
+.container { background:white; padding:25px; width:420px; margin:30px auto; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.2); }
+h2 { text-align:center; color:#b22222; }
+h3 { margin-top:20px; color:#444; border-bottom:2px solid #eee; padding-bottom:5px; }
+label { display:block; margin:6px 0; cursor:pointer; }
+button { background:#b22222; color:white; border:none; padding:10px 15px; border-radius:5px; font-size:14px; cursor:pointer; margin-top:10px; }
+button:hover { background:#8b0000; }
+.error { color:red; font-size:13px; margin-top:5px; }
+.total { margin-top:15px; font-weight:bold; font-size:18px; color:#b22222; text-align:center; }
+#vahvistus { color:green; font-weight:bold; margin-top:10px; }
+>>>>>>> 84c56925b7d1eda80994ee588ff753347d16c458
 </style>
 </head>
-
 <body>
 
 <h1>🍕 Klassikot</h1>
 
+<<<<<<< HEAD
 <div class="menu" id="menu"></div>
 
 
+=======
+<div class="container">
+<a href="index.html"><button style="margin-bottom:10px;">&#8592; Takaisin pääsivulle</button></a>
+<h2>Luo fantasia-pizza</h2>
+>>>>>>> 84c56925b7d1eda80994ee588ff753347d16c458
 
 
 <div class="cart-global">
 
+<<<<<<< HEAD
 <h3>🛒 Ostoskori</h3>
 
 <ul id="cartList"></ul>
+=======
+<h3>Täytteet (3–5)</h3>
+<label><input type="checkbox" name="tayte" data-price="1.5" value="Kinkku"> Kinkku (+1.5€)</label>
+<label><input type="checkbox" name="tayte" data-price="1.5" value="Pepperoni"> Pepperoni (+1.5€)</label>
+<label><input type="checkbox" name="tayte" data-price="1.5" value="Kana"> Kana (+1.5€)</label>
+<label><input type="checkbox" name="tayte" data-price="2.5" value="Parmankinkku"> Parmankinkku (+2.5€)</label>
+<label><input type="checkbox" name="tayte" data-price="1" value="Ananas"> Ananas (+1€)</label>
+<label><input type="checkbox" name="tayte" data-price="1" value="Sienet"> Sienet (+1€)</label>
+<label><input type="checkbox" name="tayte" data-price="1" value="Oliivit"> Oliivit (+1€)</label>
+<label><input type="checkbox" name="tayte" data-price="1" value="Punasipuli"> Punasipuli (+1€)</label>
+<label><input type="checkbox" name="tayte" data-price="2" value="Aurajuusto"> Aurajuusto (+2€)</label>
+<label><input type="checkbox" name="tayte" data-price="1" value="Jalapeño"> Jalapeño (+1€)</label>
+>>>>>>> 84c56925b7d1eda80994ee588ff753347d16c458
 
 <p><strong>Yhteensä: <span id="cartTotal">0</span> €</strong></p>
 
+<<<<<<< HEAD
 <button onclick="openOrder()">Vahvista tilaus</button>
 
 </div>
@@ -155,8 +193,17 @@ Kuljetus
 <button onclick="confirmOrder()">Tilaa</button>
 
 <p id="orderStatus"></p>
+=======
+<h3>Juusto</h3>
+<label><input type="radio" name="juusto" value="Mozzarella" data-price="0" checked> Mozzarella</label>
+<label><input type="radio" name="juusto" value="Buffalomozzarella" data-price="2"> Buffalomozzarella (+2€)</label>
 
-</div>
+<div class="total">Hinta: <span id="totalPrice">9.00</span> €</div>
+<br>
+<button onclick="hyvaksyPizza()">Lisää ostoskoriin</button>
+<p id="vahvistus"></p>
+>>>>>>> 84c56925b7d1eda80994ee588ff753347d16c458
+
 </div>
 
 
@@ -166,6 +213,7 @@ Kuljetus
 
 
 <script>
+<<<<<<< HEAD
 
 const pizzat=[
 ["Lihamestari",14.9,"Images/Lihamestari.jpg","Kinkku, paahdettu pekoni, kebabliha, pepperonimakkara, naudanjauheliha"],
@@ -428,7 +476,61 @@ cookingTime--;
 
 updateCart();
 
-</script>
+=======
+const basePrice = 9;
 
+function calculatePrice(){
+  let total = basePrice;
+  document.querySelectorAll("input:checked").forEach(el=>{
+    if(el.dataset.price) total += Number(el.dataset.price);
+  });
+  document.getElementById("totalPrice").textContent = total.toFixed(2);
+}
+
+document.querySelectorAll('input[name="tayte"]').forEach(el=>{
+  el.addEventListener("change", checkToppings);
+});
+document.querySelectorAll('input[type="radio"]').forEach(el=>{
+  el.addEventListener("change", calculatePrice);
+});
+
+function checkToppings(){
+  let checked = document.querySelectorAll('input[name="tayte"]:checked');
+  if(checked.length > 5){
+    this.checked = false;
+    document.getElementById("error").textContent = "Voit valita enintään 5 täytettä.";
+  } else {
+    document.getElementById("error").textContent = "";
+  }
+  calculatePrice();
+}
+
+function hyvaksyPizza(){
+  let toppings = document.querySelectorAll('input[name="tayte"]:checked');
+
+  if(toppings.length < 3 || toppings.length > 5){
+    document.getElementById("error").textContent = "Valitse 3–5 täytettä.";
+    return;
+  }
+
+  document.getElementById("error").textContent = "";
+
+  let pohja = document.querySelector('input[name="pohja"]:checked').value;
+  let kastike = document.querySelector('input[name="kastike"]:checked').value;
+  let juusto = document.querySelector('input[name="juusto"]:checked').value;
+
+  let lista = [];
+  toppings.forEach(t => lista.push(t.value));
+
+  let details = "Pohja: "+pohja+" | Kastike: "+kastike+" | Juusto: "+juusto+" | Täytteet: "+lista.join(", ");
+  let price = parseFloat(document.getElementById("totalPrice").textContent);
+  Cart.addItem("Fantasia-pizza", price, details);
+
+  document.getElementById("vahvistus").innerHTML =
+    "Lisätty ostoskoriin!"
+}
+>>>>>>> 84c56925b7d1eda80994ee588ff753347d16c458
+</script>
+<script src="cart.js"></script>
 </body>
 </html>

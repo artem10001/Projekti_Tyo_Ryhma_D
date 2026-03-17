@@ -5,40 +5,28 @@ body {
     margin: 0;
 }
 
-
-.login-bar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 100%;
-    background: white;
-    padding: 10px;
-    text-align: right;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    z-index: 1000;
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
-.login-bar input {
-    padding: 6px;
-    margin-left: 5px;
-}
-
-
-.header {
+.top-logo, .header {
+    position: relative; /* TÄRKEÄ */
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     background-color: darkred;
     padding: 30px;
     color: white;
-    margin-top: 50px;
+    text-align: center;
 }
 
-.logo {
+.top-logo img, .logo {
     width: 120px;
 }
 
-.header h1 {
+.top-logo h1, .header h1 {
     font-size: 48px;
     margin: 10px 0 0 0;
 }
@@ -48,13 +36,13 @@ body {
     font-style: italic;
 }
 
-
 .navbar {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #8b0000;
     position: relative;
+    flex-wrap: wrap;
 }
 
 .navbar a {
@@ -68,11 +56,10 @@ body {
     background-color: red;
 }
 
-
 main {
     max-width: 1200px;
     margin: auto;
-    padding: 40px;
+    padding: 40px 20px;
 }
 
 .welcome {
@@ -85,7 +72,6 @@ main {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
 }
-
 
 .pizza-card {
     text-decoration: none;
@@ -111,8 +97,7 @@ main {
     margin-top: 15px;
 }
 
-
-.back-button {
+.back-button, .back {
     text-align: center;
     margin-top: 30px;
 }
@@ -131,7 +116,6 @@ main {
     background-color: red;
 }
 
-/* kirjautumis nappula sekä kirjautumis menu */
 #login_container {
     position: absolute;
     right: 18px;
@@ -153,20 +137,11 @@ main {
     letter-spacing: 1px;
     text-transform: uppercase;
     box-shadow: 0 3px 8px rgba(0,0,0,0.25);
-    transition: background 0.2s, transform 0.1s;
     white-space: nowrap;
 }
 
 #login_toggle_btn:hover {
     background: rgb(91, 0, 0);
-}
-
-#login_toggle_btn.logged-in {
-    background: #2b9900;
-}
-
-#login_toggle_btn.logged-in:hover {
-    background: #207e00;
 }
 
 #login_panel {
@@ -180,7 +155,7 @@ main {
     border-radius: 6px;
     border-top: 4px solid darkred;
     box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-    padding: 20px 18px 16px 18px;
+    padding: 20px;
     box-sizing: border-box;
 }
 
@@ -193,9 +168,7 @@ main {
     margin: 0 0 14px 0;
     font-size: 15px;
     color: darkred;
-    font-family: Arial, sans-serif;
     font-weight: bold;
-    letter-spacing: 1px;
     text-transform: uppercase;
     border-bottom: 1px solid #eee;
     padding-bottom: 10px;
@@ -209,16 +182,19 @@ main {
     border: 1.5px solid #ddd;
     border-radius: 5px;
     font-size: 14px;
-    box-sizing: border-box;
-    transition: border-color 0.2s;
     outline: none;
-    background: #fff;
-    color: #333;
 }
 
 #login_fields input[type="text"]:focus,
 #login_fields input[type="password"]:focus {
     border-color: darkred;
+}
+
+.btn-login, .btn-register, .btn-logout {
+    cursor: pointer;
+    border-radius: 5px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
 .btn-login {
@@ -227,34 +203,17 @@ main {
     background: darkred;
     color: #fff;
     border: none;
-    border-radius: 5px;
     font-size: 13px;
     font-weight: bold;
-    cursor: pointer;
-    margin-top: 2px;
-    transition: background 0.2s;
-    letter-spacing: 1px;
-    text-transform: uppercase;
 }
 
 .btn-login:hover {
     background: #7a0000;
 }
 
-.panel-divider {
-    border: none;
-    border-top: 1px solid #eee;
-    margin: 14px 0 12px 0;
-}
-
 .register-section {
     text-align: center;
-}
-
-.register-section p {
-    font-size: 12px;
-    color: #999;
-    margin: 0 0 8px 0;
+    margin-top: 10px;
 }
 
 .btn-register {
@@ -263,12 +222,8 @@ main {
     background: transparent;
     color: darkred;
     border: 2px solid darkred;
-    border-radius: 5px;
     font-size: 12px;
     font-weight: bold;
-    cursor: pointer;
-    letter-spacing: 1px;
-    text-transform: uppercase;
 }
 
 .btn-register:hover {
@@ -281,73 +236,44 @@ main {
     text-align: center;
 }
 
-#logout_section p {
-    font-size: 14px;
-    color: #333;
-    margin: 0 0 14px 0;
+.cart-global {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 260px;
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    color: black;
 }
 
-#logout_section strong {
-    color: darkred;
+.cart-global ul {
+    padding-left: 18px;
 }
 
-.btn-logout {
-    width: 100%;
-    padding: 9px;
-    background: transparent;
-    color: #aaa;
-    border: 1.5px solid #ddd;
-    border-radius: 5px;
-    font-size: 12px;
+.cart-global button {
+    margin-left: 4px;
+    margin-top: 5px;
     cursor: pointer;
-    transition: all 0.2s;
-    letter-spacing: 1px;
-    text-transform: uppercase;
 }
 
-.btn-logout:hover {
-    background: #f5f5f5;
-    color: #555;
-    border-color: #bbb;
-}
-
-.panel-message {
-    display: none;
-    font-size: 12px;
-    border-radius: 4px;
-    padding: 7px 10px;
-    margin-top: 10px;
-    text-align: center;
-}
-
-.panel-message.error {
-    background: #fdecea;
-    color: darkred;
-    border: 1px solid #c0392b;
-}
-
-.panel-message.success {
-    background: #eafaf1;
-    color: #1e8449;
-    border: 1px solid #a9dfbf;
-}
-
-.top-logo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: darkred;
-    padding: 30px;
+.drink-btn {
+    font-size: 22px;
+    padding: 18px 40px;
+    background: linear-gradient(45deg, darkred, red);
     color: white;
-    text-align: center;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin: 25px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+    transition: all 0.2s ease;
 }
 
-.top-logo img {
-    width: 120px;
-}
-
-.top-logo h1 {
-    font-size: 48px;
-    margin: 10px 0 0 0;
+.drink-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
 }

@@ -2,90 +2,116 @@
 <html lang="fi">
 
 <head>
-    <meta charset="UTF-8">
-    <title>PizzaTown</title>
-    <link rel="stylesheet" href="visuals.css">
+<meta charset="UTF-8">
+<title>PizzaTown</title>
+<link rel="stylesheet" href="visuals.css">
+
+<style>
+.modal{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+}
+
+.modal-content{
+    background:white;
+    width:320px;
+    margin:150px auto;
+    padding:20px;
+    border-radius:10px;
+    text-align:center;
+}
+</style>
+
 </head>
+
 <body>
 
-    <header class="top-logo">
-        <img src="Images/Pizza logo.png" alt="Pizza Baronen logo">
-        <h1>PizzaTown</h1>
-        <p class="slogan">Tuoretta pizzaa joka päivä</p>
-    </header>
+<header class="top-logo">
+<img src="Images/Pizza logo.png">
+<h1>PizzaTown</h1>
+<p class="slogan">Tuoretta pizzaa joka päivä</p>
+</header>
 
-    <nav class="navbar">
-        <a href="index.html">Etusivu</a>
-        <a href="Valmiit pizzat.html">Valmiit pizzat</a>
-        <a href="oma.html">Luo oma pizza</a>
-        <a href="klassikot.html">Klassikot</a>
+<nav class="navbar">
+<a href="index.html">Etusivu</a>
+<a href="Valmiit pizzat.html">Valmiit pizzat</a>
+<a href="oma.html">Luo oma pizza</a>
+<a href="klassikot.html">Klassikot</a>
+</nav>
 
-        <div id="login_container">
-            <button id="login_toggle_btn" onclick="toggleLoginPanel()">Kirjaudu sisään</button>
 
-            <div id="login_panel">
-                <h3>Kirjaudu sisään</h3>
+<div style="text-align:center; margin:20px;">
+<button onclick="openDrinks()">🥤 Tilaa juomia</button>
+</div>
 
-                <div id="login_fields">
-                    <input id="nimi" type="text" placeholder="Käyttäjänimi" />
-                    <input id="salasana" type="password" placeholder="Salasana" />
-                    <button class="btn-login" onclick="login()">Kirjaudu sisään</button>
 
-                    <div id="panel_message" class="panel-message"></div>
+<div id="drinkPopup" class="modal">
+<div class="modal-content">
+<h3>Valitse juomat</h3>
 
-                    <hr class="panel-divider">
+<button onclick="addDrink('Coca-Cola', 3)">Coca-Cola 3€</button><br><br>
+<button onclick="addDrink('Coca-Cola Zero', 3)">Coca-Cola Zero 3€</button><br><br>
+<button onclick="addDrink('Fanta', 3)">Fanta 3€</button><br><br>
+<button onclick="addDrink('Sprite', 3)">Sprite 3€</button><br><br>
 
-                    <div class="register-section">
-                        <p>Ei vielä tiliä?</p>
-                        <button class="btn-register" onclick="rekisteröidy()">Rekisteröidy</button>
-                    </div>
-                </div>
+<button onclick="closeDrinks()">Sulje</button>
+</div>
+</div>
 
-                <div id="logout_section">
-                    <p>Olet kirjautunut sisään, <strong id="logged_in_name"></strong>!</p>
-                    <button class="btn-logout" onclick="logout()">Kirjaudu ulos</button>
-                </div>
-            </div>
-        </div>
-    </nav>
+<main>
+<section class="welcome">
+<h2>Tervetuloa!</h2>
+<p>
+Valitse valmis pizza klassikkolistalta
+tai tee oma Fantasia-pizza juuri
+sinun haluamillasi täytteillä.
+</p>
+</section>
 
-    <main>
+<section class="menu-section">
+<h2>MIKÄ MAISTUISI TÄNÄÄN?</h2>
 
-        <section class="welcome">
-            <h2>Tervetuloa!</h2>
-            <p>
-                Valitse valmis pizza klassikkolistalta tai tee oma Fantasia-pizza
-                juuri sinun haluamillasi täytteillä.
-            </p>
-        </section>
+<div class="pizza-grid">
 
-        <section class="menu-section">
-            <h2>MIKÄ MAISTUISI TÄNÄÄN?</h2>
+<a href="Valmiit pizzat.html" class="pizza-card">
+<img src="Images/Valmiit pizzat.jpg">
+<h3>Valmiit pizzat</h3>
+</a>
 
-            <div class="pizza-grid">
+<a href="oma.html" class="pizza-card">
+<img src="Images/Luo oma.jpg">
+<h3>Luo oma pizza</h3>
+</a>
 
-                <a href="Valmiit pizzat.html" class="pizza-card">
-                    <img src="Images/Valmiit pizzat.jpg" alt="Valmiit pizzat">
-                    <h3>Valmiit pizzat</h3>
-                </a>
+<a href="klassikot.html" class="pizza-card">
+<img src="Images/lataa 11.jpg">
+<h3>Klassikot</h3>
+</a>
 
-                <a href="oma.html" class="pizza-card">
-                    <img src="Images/Luo oma.jpg" alt="Luo oma pizza">
-                    <h3>Luo oma pizza</h3>
-                </a>
+</div>
+</section>
+</main>
 
-                <a href="klassikot.html" class="pizza-card">
-                    <img src="Images/lataa 11.jpg" alt="Klassikot">
-                    <h3>Klassikot</h3>
-                </a>
+<script>
 
-            </div>
-        </section>
+function openDrinks(){
+    document.getElementById("drinkPopup").style.display = "block";
+}
 
-    </main>
+function closeDrinks(){
+    document.getElementById("drinkPopup").style.display = "none";
+}
 
-    <script src="scripts.js"></script>
+function addDrink(name, price){
+    alert(name + " lisätty tilaukseen! Hinta: " + price + "€");
+    closeDrinks();
+}
+</script>
 
 </body>
-
 </html>

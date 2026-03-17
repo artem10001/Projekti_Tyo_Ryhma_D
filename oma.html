@@ -2,535 +2,134 @@
 <html lang="fi">
 <head>
 <meta charset="UTF-8">
-<<<<<<< HEAD
-<title>Klassikot - PizzaTown</title>
-
-<style>
-
-body{
-font-family:Arial;
-background:#f4f4f4;
-margin:0;
-padding:20px;
-}
-
-h1{
-text-align:center;
-}
-
-.menu{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:20px;
-}
-
-.pizza{
-background:white;
-padding:15px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.1);
-text-align:center;
-}
-
-.pizza img{
-width:100%;
-border-radius:10px;
-}
-
-.toppings{
-text-align:left;
-margin:10px 0;
-}
-
-button{
-background:#b22222;
-color:white;
-border:none;
-padding:8px 12px;
-border-radius:5px;
-cursor:pointer;
-}
-
-button:hover{
-background:red;
-}
-
-.cart-global{
-position:absolute;
-left:20px;
-top:120px;
-width:260px;
-background:white;
-padding:15px;
-border-radius:10px;
-box-shadow:0 0 10px rgba(0,0,0,0.2);
-}
-
-.cart-global ul{
-padding-left:18px;
-}
-
-.cart-global button{
-margin-top:5px;
-margin-left:4px;
-}
-
-.back{
-text-align:center;
-margin-top:30px;
-}
-
-a{
-text-decoration:none;
-color:#b22222;
-font-weight:bold;
-}
-
-.modal{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.6);
-}
-
-.modal-content{
-background:white;
-width:320px;
-margin:150px auto;
-padding:20px;
-border-radius:10px;
-text-align:center;
-}
-
-=======
-<title>PizzaTown Fantasia Pizza</title>
-<style>
-body { font-family:Arial,sans-serif; background:#fff3e6; margin:0; }
-header { background:#b22222; color:white; text-align:center; padding:20px; font-size:28px; font-weight:bold; }
-.logo { width:120px; display:block; margin:0 auto 10px auto; }
-button:hover { background:#8b0000; }
-.container { background:white; padding:25px; width:420px; margin:30px auto; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.2); }
-h2 { text-align:center; color:#b22222; }
-h3 { margin-top:20px; color:#444; border-bottom:2px solid #eee; padding-bottom:5px; }
-label { display:block; margin:6px 0; cursor:pointer; }
-button { background:#b22222; color:white; border:none; padding:10px 15px; border-radius:5px; font-size:14px; cursor:pointer; margin-top:10px; }
-button:hover { background:#8b0000; }
-.error { color:red; font-size:13px; margin-top:5px; }
-.total { margin-top:15px; font-weight:bold; font-size:18px; color:#b22222; text-align:center; }
-#vahvistus { color:green; font-weight:bold; margin-top:10px; }
->>>>>>> 84c56925b7d1eda80994ee588ff753347d16c458
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luo oma pizza - PizzaTown</title>
+<link rel="stylesheet" href="visuals.css">
 </head>
 <body>
 
-<h1>🍕 Klassikot</h1>
+<header class="top-logo">
+    <img src="Images/Pizza logo.png" alt="PizzaTown logo">
+    <h1>PizzaTown</h1>
+    <p class="slogan">Tuoretta pizzaa joka päivä</p>
+</header>
 
-<<<<<<< HEAD
-<div class="menu" id="menu"></div>
+<nav class="navbar">
+    <a href="index.html">Etusivu</a>
+    <a href="Valmiit pizzat.html">Valmiit pizzat</a>
+    <a href="oma.html">Luo oma pizza</a>
+    <a href="klassikot.html">Klassikot</a>
+    <div id="login_container">
+        <button id="login_toggle_btn" onclick="toggleLoginPanel()">Kirjaudu sisään</button>
+        <div id="login_panel">
+            <h3>Kirjaudu sisään</h3>
+            <div id="login_fields">
+                <input id="nimi" type="text" placeholder="Käyttäjänimi" />
+                <input id="salasana" type="password" placeholder="Salasana" />
+                <button class="btn-login" onclick="login()">Kirjaudu sisään</button>
+                <div id="panel_message" class="panel-message"></div>
+                <hr class="panel-divider">
+                <div class="register-section">
+                    <p>Ei vielä tiliä?</p>
+                    <button class="btn-register" onclick="rekisteröidy()">Rekisteröidy</button>
+                </div>
+            </div>
+            <div id="logout_section">
+                <p>Olet kirjautunut sisään, <strong id="logged_in_name"></strong>!</p>
+                <button class="btn-logout" onclick="logout()">Kirjaudu ulos</button>
+            </div>
+        </div>
+    </div>
+</nav>
 
-
-=======
 <div class="container">
-<a href="index.html"><button style="margin-bottom:10px;">&#8592; Takaisin pääsivulle</button></a>
-<h2>Luo fantasia-pizza</h2>
->>>>>>> 84c56925b7d1eda80994ee588ff753347d16c458
+    <h2>Luo Fantasia-pizza</h2>
 
+    <h3>Pohja</h3>
+    <label><input type="radio" name="pohja" value="Normaali" data-price="0" checked> Normaali</label>
+    <label><input type="radio" name="pohja" value="Gluteeniton" data-price="1.5"> Gluteeniton <em style="color:var(--red);font-style:normal;">+1.50 €</em></label>
 
-<div class="cart-global">
+    <h3>Kastike</h3>
+    <label><input type="radio" name="kastike" value="Tomaatti" data-price="0" checked> Tomaattikastike</label>
+    <label><input type="radio" name="kastike" value="Tomaatti + valkosipuli" data-price="0.5"> Tomaatti + valkosipuli <em style="color:var(--red);font-style:normal;">+0.50 €</em></label>
 
-<<<<<<< HEAD
-<h3>🛒 Ostoskori</h3>
+    <h3>Täytteet (valitse 3–5)</h3>
+    <label><input type="checkbox" name="tayte" data-price="1.5" value="Kinkku"> Kinkku <em style="color:var(--red);font-style:normal;">+1.50 €</em></label>
+    <label><input type="checkbox" name="tayte" data-price="1.5" value="Pepperoni"> Pepperoni <em style="color:var(--red);font-style:normal;">+1.50 €</em></label>
+    <label><input type="checkbox" name="tayte" data-price="1.5" value="Kana"> Kana <em style="color:var(--red);font-style:normal;">+1.50 €</em></label>
+    <label><input type="checkbox" name="tayte" data-price="2.5" value="Parmankinkku"> Parmankinkku <em style="color:var(--red);font-style:normal;">+2.50 €</em></label>
+    <label><input type="checkbox" name="tayte" data-price="1.0" value="Ananas"> Ananas <em style="color:var(--red);font-style:normal;">+1.00 €</em></label>
+    <label><input type="checkbox" name="tayte" data-price="1.0" value="Sienet"> Sienet <em style="color:var(--red);font-style:normal;">+1.00 €</em></label>
+    <label><input type="checkbox" name="tayte" data-price="1.0" value="Oliivit"> Oliivit <em style="color:var(--red);font-style:normal;">+1.00 €</em></label>
+    <label><input type="checkbox" name="tayte" data-price="1.0" value="Punasipuli"> Punasipuli <em style="color:var(--red);font-style:normal;">+1.00 €</em></label>
+    <label><input type="checkbox" name="tayte" data-price="2.0" value="Aurajuusto"> Aurajuusto <em style="color:var(--red);font-style:normal;">+2.00 €</em></label>
+    <label><input type="checkbox" name="tayte" data-price="1.0" value="Jalapeño"> Jalapeño <em style="color:var(--red);font-style:normal;">+1.00 €</em></label>
+    <label><input type="checkbox" name="tayte" data-price="1.5" value="Kebab"> Kebab <em style="color:var(--red);font-style:normal;">+1.50 €</em></label>
+    <label><input type="checkbox" name="tayte" data-price="1.5" value="Jauheliha"> Jauheliha <em style="color:var(--red);font-style:normal;">+1.50 €</em></label>
+    <div class="error" id="error"></div>
 
-<ul id="cartList"></ul>
-=======
-<h3>Täytteet (3–5)</h3>
-<label><input type="checkbox" name="tayte" data-price="1.5" value="Kinkku"> Kinkku (+1.5€)</label>
-<label><input type="checkbox" name="tayte" data-price="1.5" value="Pepperoni"> Pepperoni (+1.5€)</label>
-<label><input type="checkbox" name="tayte" data-price="1.5" value="Kana"> Kana (+1.5€)</label>
-<label><input type="checkbox" name="tayte" data-price="2.5" value="Parmankinkku"> Parmankinkku (+2.5€)</label>
-<label><input type="checkbox" name="tayte" data-price="1" value="Ananas"> Ananas (+1€)</label>
-<label><input type="checkbox" name="tayte" data-price="1" value="Sienet"> Sienet (+1€)</label>
-<label><input type="checkbox" name="tayte" data-price="1" value="Oliivit"> Oliivit (+1€)</label>
-<label><input type="checkbox" name="tayte" data-price="1" value="Punasipuli"> Punasipuli (+1€)</label>
-<label><input type="checkbox" name="tayte" data-price="2" value="Aurajuusto"> Aurajuusto (+2€)</label>
-<label><input type="checkbox" name="tayte" data-price="1" value="Jalapeño"> Jalapeño (+1€)</label>
->>>>>>> 84c56925b7d1eda80994ee588ff753347d16c458
+    <h3>Juusto</h3>
+    <label><input type="radio" name="juusto" value="Mozzarella" data-price="0" checked> Mozzarella</label>
+    <label><input type="radio" name="juusto" value="Buffalomozzarella" data-price="2.0"> Buffalomozzarella <em style="color:var(--red);font-style:normal;">+2.00 €</em></label>
 
-<p><strong>Yhteensä: <span id="cartTotal">0</span> €</strong></p>
+    <div class="total">Hinta: <span id="totalPrice">9.00</span> €</div>
 
-<<<<<<< HEAD
-<button onclick="openOrder()">Vahvista tilaus</button>
-
+    <button onclick="hyvaksyPizza()">Lisää ostoskoriin</button>
+    <p id="vahvistus"></p>
 </div>
 
-
-
-<div id="orderPopup" class="modal">
-
-<div class="modal-content">
-
-<h3>Vahvista tilaus</h3>
-
-<input type="text" id="customerName" placeholder="Nimi"><br><br>
-
-<input type="text" id="customerAddress" placeholder="Osoite"><br><br>
-
-<label>
-<input type="radio" name="deliveryType" value="nouto" checked>
-Nouto
-</label>
-
-<label>
-<input type="radio" name="deliveryType" value="kuljetus">
-Kuljetus
-</label>
-
-<br><br>
-
-<button onclick="confirmOrder()">Tilaa</button>
-
-<p id="orderStatus"></p>
-=======
-<h3>Juusto</h3>
-<label><input type="radio" name="juusto" value="Mozzarella" data-price="0" checked> Mozzarella</label>
-<label><input type="radio" name="juusto" value="Buffalomozzarella" data-price="2"> Buffalomozzarella (+2€)</label>
-
-<div class="total">Hinta: <span id="totalPrice">9.00</span> €</div>
-<br>
-<button onclick="hyvaksyPizza()">Lisää ostoskoriin</button>
-<p id="vahvistus"></p>
->>>>>>> 84c56925b7d1eda80994ee588ff753347d16c458
-
+<div class="back" style="padding-bottom:60px;">
+    <a href="index.html">← Takaisin etusivulle</a>
 </div>
 
-
-<div class="back">
-<a href="index.html">⬅ Takaisin etusivulle</a>
-</div>
-
-
+<script src="cart.js"></script>
+<script src="scripts.js"></script>
 <script>
-<<<<<<< HEAD
-
-const pizzat=[
-["Lihamestari",14.9,"Images/Lihamestari.jpg","Kinkku, paahdettu pekoni, kebabliha, pepperonimakkara, naudanjauheliha"],
-["Opera Special",13.2,"Images/Opera special.jpg","Tonnikala, kinkku, salami"],
-["Americana",12.4,"Images/Americana.jpg","Kinkku, ananas, aura-sinihomejuusto"]
-];
-
-const toppings=[
-["Extra juusto",1.0],
-["Pepperoni",1.5],
-["Kebab",1.5],
-["Paprika",0.5],
-["Sieni",0.5],
-["Ananas",0.7],
-["Tonnikala",1.2]
-];
-
-let cart=JSON.parse(localStorage.getItem("cart"))||[];
-let selectedToppings={};
-
-let cookingTime=0;
-let timer;
-
-const menu=document.getElementById("menu");
-
-
-pizzat.forEach((pizza,index)=>{
-
-let toppingsOptions=toppings.map((topping,tIndex)=>
-
-`<label>
-<input type="checkbox" data-pizza="${index}" data-topping="${tIndex}" onchange="updateTopping(this)">
-${topping[0]} (+${topping[1]} €)
-</label><br>`
-
-).join("");
-
-menu.innerHTML+=`
-
-<div class="pizza">
-
-<h2>${pizza[0]}</h2>
-
-<img src="${pizza[2]}" alt="${pizza[0]}">
-
-<p>${pizza[3]}</p>
-
-<p><strong>${pizza[1].toFixed(2)} €</strong></p>
-
-<div class="toppings">
-${toppingsOptions}
-</div>
-
-<button onclick="addPizza(${index})">
-Lisää ostoskoriin
-</button>
-
-</div>
-
-`;
-
-});
-
-
-function updateTopping(checkbox){
-
-const pizzaIndex=parseInt(checkbox.dataset.pizza);
-const toppingIndex=parseInt(checkbox.dataset.topping);
-
-if(!selectedToppings[pizzaIndex]) selectedToppings[pizzaIndex]=[];
-
-if(checkbox.checked){
-selectedToppings[pizzaIndex].push(toppingIndex);
-}else{
-selectedToppings[pizzaIndex]=selectedToppings[pizzaIndex].filter(i=>i!==toppingIndex);
-}
-
-}
-
-
-function addPizza(index){
-
-const pizza=pizzat[index];
-
-let toppingsText=[];
-let toppingsTotal=0;
-
-(selectedToppings[index]||[]).forEach(tIndex=>{
-toppingsText.push(toppings[tIndex][0]);
-toppingsTotal+=toppings[tIndex][1];
-});
-
-const itemName=pizza[0]+(toppingsText.length? " + "+toppingsText.join(", "):"");
-const itemPrice=pizza[1]+toppingsTotal;
-
-const existing=cart.find(item=>item.name===itemName);
-
-if(existing){
-existing.qty++;
-}else{
-cart.push({name:itemName,price:itemPrice,qty:1});
-}
-
-saveCart();
-
-selectedToppings[index]=[];
-
-document.querySelectorAll(`input[data-pizza="${index}"]`).forEach(el=>el.checked=false);
-
-}
-
-
-function changeQty(i,amount){
-
-cart[i].qty+=amount;
-
-if(cart[i].qty<=0){
-cart.splice(i,1);
-}
-
-saveCart();
-
-}
-
-
-function removeItem(i){
-
-cart.splice(i,1);
-
-saveCart();
-
-}
-
-
-function saveCart(){
-
-localStorage.setItem("cart",JSON.stringify(cart));
-
-updateCart();
-
-}
-
-
-function updateCart(){
-
-const list=document.getElementById("cartList");
-const totalSpan=document.getElementById("cartTotal");
-
-list.innerHTML="";
-
-let total=0;
-
-cart.forEach((item,i)=>{
-
-total+=item.price*item.qty;
-
-list.innerHTML+=`
-
-<li>
-
-${item.name} (${item.qty})
-
-<button onclick="changeQty(${i},1)">+</button>
-<button onclick="changeQty(${i},-1)">−</button>
-<button onclick="removeItem(${i})">Poista</button>
-
-</li>
-
-`;
-
-});
-
-totalSpan.textContent=total.toFixed(2);
-
-}
-
-
-function openOrder(){
-
-if(cart.length===0){
-
-alert("Ostoskori on tyhjä!");
-
-return;
-
-}
-
-document.getElementById("orderPopup").style.display="block";
-
-}
-
-
-function confirmOrder(){
-
-let name=document.getElementById("customerName").value;
-let address=document.getElementById("customerAddress").value;
-
-if(!name||!address){
-
-alert("Täytä kaikki tiedot!");
-
-return;
-
-}
-
-calculateCookingTime();
-
-startTimer();
-
-}
-
-
-function calculateCookingTime(){
-
-cookingTime=5;
-
-cart.forEach(item=>{
-
-cookingTime+=2*item.qty;
-
-if(item.name.includes("+")){
-
-let toppings=item.name.split("+")[1].split(",");
-
-cookingTime+=toppings.length;
-
-}
-
-});
-
-}
-
-
-function startTimer(){
-
-const status=document.getElementById("orderStatus");
-
-timer=setInterval(()=>{
-
-if(cookingTime<=0){
-
-clearInterval(timer);
-
-status.innerHTML="🍕 Pizza valmis!";
-
-cart=[];
-saveCart();
-
-return;
-
-}
-
-status.innerHTML="Valmistusaika jäljellä: "+cookingTime+" min";
-
-cookingTime--;
-
-},1000);
-
-}
-
-updateCart();
-
-=======
 const basePrice = 9;
 
 function calculatePrice(){
-  let total = basePrice;
-  document.querySelectorAll("input:checked").forEach(el=>{
-    if(el.dataset.price) total += Number(el.dataset.price);
-  });
-  document.getElementById("totalPrice").textContent = total.toFixed(2);
+    let total = basePrice;
+    document.querySelectorAll('input[name="pohja"]:checked, input[name="kastike"]:checked, input[name="juusto"]:checked').forEach(el => {
+        if(el.dataset.price) total += Number(el.dataset.price);
+    });
+    document.querySelectorAll('input[name="tayte"]:checked').forEach(el => {
+        if(el.dataset.price) total += Number(el.dataset.price);
+    });
+    document.getElementById("totalPrice").textContent = total.toFixed(2);
 }
 
-document.querySelectorAll('input[name="tayte"]').forEach(el=>{
-  el.addEventListener("change", checkToppings);
-});
-document.querySelectorAll('input[type="radio"]').forEach(el=>{
-  el.addEventListener("change", calculatePrice);
-});
+document.querySelectorAll('input[name="tayte"]').forEach(el => el.addEventListener("change", checkToppings));
+document.querySelectorAll('input[type="radio"]').forEach(el => el.addEventListener("change", calculatePrice));
 
 function checkToppings(){
-  let checked = document.querySelectorAll('input[name="tayte"]:checked');
-  if(checked.length > 5){
-    this.checked = false;
-    document.getElementById("error").textContent = "Voit valita enintään 5 täytettä.";
-  } else {
-    document.getElementById("error").textContent = "";
-  }
-  calculatePrice();
+    const checked = document.querySelectorAll('input[name="tayte"]:checked');
+    if(checked.length > 5){
+        this.checked = false;
+        document.getElementById("error").textContent = "Voit valita enintään 5 täytettä.";
+    } else {
+        document.getElementById("error").textContent = "";
+    }
+    calculatePrice();
 }
 
 function hyvaksyPizza(){
-  let toppings = document.querySelectorAll('input[name="tayte"]:checked');
+    const toppings = document.querySelectorAll('input[name="tayte"]:checked');
+    if(toppings.length < 3 || toppings.length > 5){
+        document.getElementById("error").textContent = "Valitse 3–5 täytettä.";
+        return;
+    }
+    document.getElementById("error").textContent = "";
 
-  if(toppings.length < 3 || toppings.length > 5){
-    document.getElementById("error").textContent = "Valitse 3–5 täytettä.";
-    return;
-  }
+    const pohja   = document.querySelector('input[name="pohja"]:checked').value;
+    const kastike = document.querySelector('input[name="kastike"]:checked').value;
+    const juusto  = document.querySelector('input[name="juusto"]:checked').value;
+    const lista   = [...toppings].map(t => t.value);
+    const price   = parseFloat(document.getElementById("totalPrice").textContent);
 
-  document.getElementById("error").textContent = "";
-
-  let pohja = document.querySelector('input[name="pohja"]:checked').value;
-  let kastike = document.querySelector('input[name="kastike"]:checked').value;
-  let juusto = document.querySelector('input[name="juusto"]:checked').value;
-
-  let lista = [];
-  toppings.forEach(t => lista.push(t.value));
-
-  let details = "Pohja: "+pohja+" | Kastike: "+kastike+" | Juusto: "+juusto+" | Täytteet: "+lista.join(", ");
-  let price = parseFloat(document.getElementById("totalPrice").textContent);
-  Cart.addItem("Fantasia-pizza", price, details);
-
-  document.getElementById("vahvistus").innerHTML =
-    "Lisätty ostoskoriin!"
+    const details = `Pohja: ${pohja} | Kastike: ${kastike} | Juusto: ${juusto} | Täytteet: ${lista.join(", ")}`;
+    Cart.addItem("Fantasia-pizza", price, details);
+    document.getElementById("vahvistus").textContent = "✓ Lisätty ostoskoriin!";
 }
->>>>>>> 84c56925b7d1eda80994ee588ff753347d16c458
 </script>
-<script src="cart.js"></script>
 </body>
 </html>

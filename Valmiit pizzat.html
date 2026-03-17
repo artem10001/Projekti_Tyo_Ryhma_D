@@ -2,214 +2,109 @@
 <html lang="fi">
 <head>
 <meta charset="UTF-8">
-<<<<<<< HEAD
-<title>Valmiit pitsat - PizzaTown</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valmiit pizzat — PizzaTown</title>
+<link rel="stylesheet" href="visuals.css">
 <style>
-body{
-    font-family:Arial,sans-serif;
-    margin:0;
-    background:#f2f2f2;
+.menu {
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
 }
-
-header{
-    background:darkred;
-    color:white;
-    padding:20px;
-    text-align:center;
-}
-
-.menu{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
-    padding:20px;
-}
-
-.pizza{
-    background:white;
-    padding:15px;
-    border-radius:10px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
-    text-align:center;
-}
-
-button{
-    background:darkred;
-    color:white;
-    border:none;
-    padding:8px 12px;
-    border-radius:5px;
-    cursor:pointer;
-}
-
-button:hover{
-    background:red;
-}
-
-.toppings{
-    text-align:left;
-    margin-bottom:10px;
-}
-
-.back-button{
-    text-align:center;
-    margin-top:20px;
-}
-
-a{
-    text-decoration:none;
-}
-=======
-<title>Valmiit pitsat - Pizzeria Fantasia</title>
-<style>
-body { font-family: Arial, sans-serif; margin: 0; background: #f2f2f2; }
-header { background: darkred; color: white; padding: 20px; text-align: center; }
-.menu { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 20px; }
-.pizza { background: white; padding: 15px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center; }
-button { background: darkred; color: white; border: none; padding: 8px 12px; border-radius: 5px; cursor: pointer; }
-button:hover { background: red; }
-.back-button { text-align: center; margin-top: 20px; }
-.back-button button { background-color: darkred; color: white; border: none; padding: 10px 20px; font-size: 16px; border-radius: 5px; cursor: pointer; }
-.back-button button:hover { background-color: red; }
-.toppings { text-align: left; margin-bottom: 10px; }
->>>>>>> 84c56925b7d1eda80994ee588ff753347d16c458
 </style>
 </head>
 <body>
 
-<header><h1>Valmiit pitsat</h1></header>
+<header class="top-logo">
+    <img src="Images/Pizza logo.png" alt="PizzaTown logo">
+    <h1>PizzaTown</h1>
+    <p class="slogan">Tuoretta pizzaa joka päivä</p>
+</header>
+
+<nav class="navbar">
+    <a href="index.html">Etusivu</a>
+    <a href="Valmiit pizzat.html">Valmiit pizzat</a>
+    <a href="oma.html">Luo oma pizza</a>
+    <a href="klassikot.html">Klassikot</a>
+    <div id="login_container">
+        <button id="login_toggle_btn" onclick="toggleLoginPanel()">Kirjaudu sisään</button>
+        <div id="login_panel">
+            <h3>Kirjaudu sisään</h3>
+            <div id="login_fields">
+                <input id="nimi" type="text" placeholder="Käyttäjänimi" />
+                <input id="salasana" type="password" placeholder="Salasana" />
+                <button class="btn-login" onclick="login()">Kirjaudu sisään</button>
+                <div id="panel_message" class="panel-message"></div>
+                <hr class="panel-divider">
+                <div class="register-section">
+                    <p>Ei vielä tiliä?</p>
+                    <button class="btn-register" onclick="rekisteröidy()">Rekisteröidy</button>
+                </div>
+            </div>
+            <div id="logout_section">
+                <p>Olet kirjautunut sisään, <strong id="logged_in_name"></strong>!</p>
+                <button class="btn-logout" onclick="logout()">Kirjaudu ulos</button>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<h1 class="page-title">Valmiit pizzat</h1>
+<p class="page-subtitle">Klassisia makuja - valitse ja nauti</p>
 
 <div class="menu" id="menu"></div>
 
 <div class="back-button">
-<<<<<<< HEAD
-<a href="index.html">
-<button>Takaisin pääsivulle</button>
-</a>
+    <a href="index.html"><button>← Etusivulle</button></a>
 </div>
 
-<script>
-const pizzat=[
-["Margherita",10],["Pepperoni",11],["Kebab",12],["Hawaii",11],
-["Tonnikala",11.5],["Pollo",10],["Mexicana",10.5],["Opera",11],
-["Capricciosa",12],["Pizzatown Special",14],["BBQ Kana",12.5],["Kasvis",9],
-["Americana",11.5],["Salami",11],["Kinkku-Ananas",10],["Tuplajuusto",10]
-];
-
-const toppings=[
-["Extra juusto",1.0],
-["Pepperoni",1.5],
-["Kebab",1.5],
-["Paprika",0.5],
-["Sieni",0.5],
-["Ananas",0.7],
-["Tonnikala",1.2]
-];
-
-const selectedToppings={};
-const menu=document.getElementById("menu");
-
-pizzat.forEach((pizza,index)=>{
-
-    let toppingsOptions=toppings.map((topping,tIndex)=>
-        `<label>
-            <input type="checkbox" data-pizza="${index}" data-topping="${tIndex}" onchange="updateTopping(this)">
-            ${topping[0]} (+${topping[1]} €)
-        </label><br>`
-    ).join("");
-
-    menu.innerHTML+=`
-    <div class="pizza">
-        <h3>${pizza[0]}</h3>
-        <p>${pizza[1]} €</p>
-        <div class="toppings">
-        ${toppingsOptions}
-        </div>
-        <button onclick="alert('Valinta lisätty!')">Valitse</button>
-    </div>
-    `;
-});
-
-function updateTopping(checkbox){
-    const pizzaIndex=parseInt(checkbox.dataset.pizza);
-    const toppingIndex=parseInt(checkbox.dataset.topping);
-
-    if(!selectedToppings[pizzaIndex]) selectedToppings[pizzaIndex]=[];
-
-    if(checkbox.checked){
-        selectedToppings[pizzaIndex].push(toppingIndex);
-    }else{
-        selectedToppings[pizzaIndex]=selectedToppings[pizzaIndex].filter(i=>i!==toppingIndex);
-    }
-}
-=======
-    <a href="index.html"><button>Takaisin pääsivulle</button></a>
-</div>
-
+<script src="cart.js"></script>
+<script src="scripts.js"></script>
 <script>
 const pizzat = [
-  ["Margherita",10],["Pepperoni",11],["Kebab",12],["Hawaii",11],
-  ["Tonnikala",11.5],["Pollo",10],["Mexicana",10.5],["Opera",11],
-  ["Capricciosa",12],["Pizzatown Special",14],["BBQ Kana",12.5],["Kasvis",9],
-  ["Americana",11.5],["Salami",11],["Kinkku-Ananas",10],["Tuplajuusto",10]
+    ["Margherita",10],["Pepperoni",11],["Kebab",12],["Hawaii",11],
+    ["Tonnikala",11.5],["Pollo",10],["Mexicana",10.5],["Opera",11],
+    ["Capricciosa",12],["Pizzatown Special",14],["BBQ Kana",12.5],["Kasvis",9],
+    ["Americana",11.5],["Salami",11],["Kinkku-Ananas",10],["Tuplajuusto",10]
 ];
-
 const toppings = [
-  ["Extra juusto",1.0],["Pepperoni",1.5],["Kebab",1.5],
-  ["Paprika",0.5],["Sieni",0.5],["Ananas",0.7],["Tonnikala",1.2]
+    ["Extra juusto",1.0],["Pepperoni",1.5],["Kebab",1.5],
+    ["Paprika",0.5],["Sieni",0.5],["Ananas",0.7],["Tonnikala",1.2]
 ];
-
 let selectedToppings = {};
 const menu = document.getElementById("menu");
 
 pizzat.forEach((pizza, index) => {
-  let toppingsOptions = toppings.map((topping, tIndex) =>
-    `<label><input type="checkbox" data-pizza="${index}" data-topping="${tIndex}" onchange="updateTopping(this)">
-    ${topping[0]} (+${topping[1]} €)</label><br>`
-  ).join("");
-  menu.innerHTML += `
-  <div class="pizza">
-    <h3>${pizza[0]}</h3>
-    <p>${pizza[1]} €</p>
-    <div class="toppings">${toppingsOptions}</div>
-    <button onclick="addToCart(${index})">Lisää</button>
-  </div>`;
+    let toppingsOptions = toppings.map((topping, tIndex) =>
+        `<label><input type="checkbox" data-pizza="${index}" data-topping="${tIndex}" onchange="updateTopping(this)">
+        ${topping[0]} <em style="color:var(--red);font-style:normal;">+${topping[1]}€</em></label>`
+    ).join("");
+    menu.innerHTML += `
+    <div class="pizza">
+        <h3>${pizza[0]}</h3>
+        <p><strong>${pizza[1].toFixed(2)} €</strong></p>
+        <div class="toppings">${toppingsOptions}</div>
+        <button onclick="addToCart(${index})">Lisää koriin</button>
+    </div>`;
 });
 
 function updateTopping(checkbox){
-  const pizzaIndex = parseInt(checkbox.dataset.pizza);
-  const toppingIndex = parseInt(checkbox.dataset.topping);
-  if(!selectedToppings[pizzaIndex]) selectedToppings[pizzaIndex] = [];
-  if(checkbox.checked){
-    selectedToppings[pizzaIndex].push(toppingIndex);
-  } else {
-    selectedToppings[pizzaIndex] = selectedToppings[pizzaIndex].filter(i => i !== toppingIndex);
-  }
+    const pi = parseInt(checkbox.dataset.pizza), ti = parseInt(checkbox.dataset.topping);
+    if(!selectedToppings[pi]) selectedToppings[pi] = [];
+    checkbox.checked ? selectedToppings[pi].push(ti) : (selectedToppings[pi] = selectedToppings[pi].filter(i=>i!==ti));
 }
 
 function addToCart(index){
-  const pizza = pizzat[index];
-  let toppingsText = "";
-  let toppingsTotal = 0;
-  if(selectedToppings[index] && selectedToppings[index].length > 0){
-    toppingsText = selectedToppings[index].map(tIndex => {
-      toppingsTotal += toppings[tIndex][1];
-      return toppings[tIndex][0];
-    }).join(", ");
-  }
-  const price = pizza[1] + toppingsTotal;
-  const details = toppingsText ? "Lisätäytteet: " + toppingsText : "";
-  Cart.addItem(pizza[0], price, details);
-  if(selectedToppings[index]){
-    selectedToppings[index].forEach(tIndex => {
-      document.querySelector(`input[data-pizza="${index}"][data-topping="${tIndex}"]`).checked = false;
-    });
-  }
-  selectedToppings[index] = [];
+    const pizza = pizzat[index];
+    let text = "", total = 0;
+    if(selectedToppings[index]?.length){
+        text = selectedToppings[index].map(ti=>{ total+=toppings[ti][1]; return toppings[ti][0]; }).join(", ");
+    }
+    Cart.addItem(pizza[0], pizza[1]+total, text ? "Lisätäytteet: "+text : "");
+    selectedToppings[index]?.forEach(ti=>{ document.querySelector(`input[data-pizza="${index}"][data-topping="${ti}"]`).checked=false; });
+    selectedToppings[index]=[];
 }
->>>>>>> 84c56925b7d1eda80994ee588ff753347d16c458
 </script>
-<script src="cart.js"></script>
 </body>
 </html>

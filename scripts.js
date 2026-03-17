@@ -32,9 +32,21 @@ function rekisteröidy() {
         return;
     }
 
+    // Tallennetaan tiedot
     localStorage.setItem("nimi", nimi);
     localStorage.setItem("salasana", salasana);
-    showPanelMessage("Rekisteröityminen onnistui! Voit nyt kirjautua sisään.", "success");
+
+    // AUTOMAATTINEN KIRJAUTUMINEN
+    document.getElementById("login_toggle_btn").textContent = nimi;
+    document.getElementById("login_toggle_btn").classList.add("logged-in");
+
+    document.getElementById("login_fields").style.display = "none";
+    document.getElementById("logout_section").style.display = "block";
+    document.getElementById("logged_in_name").textContent = nimi;
+
+    showPanelMessage("Rekisteröityminen onnistui!", "success");
+
+    closeLoginPanel();
 }
 
 // Login-funktio, joka tarkistaa syötetyt tiedot ja päivittää UI:n
@@ -84,5 +96,18 @@ document.addEventListener("click", function(e) {
     const btn = document.getElementById("login_toggle_btn");
     if (panel && panel.style.display === "block" && !panel.contains(e.target) && e.target !== btn) {
         closeLoginPanel();
+    }
+})
+
+window.addEventListener("load", function () {
+    const nimi = localStorage.getItem("nimi");
+
+    if (nimi) {
+        document.getElementById("login_toggle_btn").textContent = nimi;
+        document.getElementById("login_toggle_btn").classList.add("logged-in");
+
+        document.getElementById("login_fields").style.display = "none";
+        document.getElementById("logout_section").style.display = "block";
+        document.getElementById("logged_in_name").textContent = nimi;
     }
 });

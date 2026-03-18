@@ -21,7 +21,6 @@ body {
 
 a { text-decoration: none; color: inherit; }
 
-/* ── Header ── */
 .top-logo {
     background: var(--red);
     padding: 20px 24px;
@@ -46,7 +45,6 @@ a { text-decoration: none; color: inherit; }
     font-weight: 400;
 }
 
-/* ── Nav ── */
 .navbar {
     background: var(--white);
     border-bottom: 1px solid var(--line);
@@ -66,7 +64,6 @@ a { text-decoration: none; color: inherit; }
 
 .navbar a:hover { color: var(--red); }
 
-/* ── Login ── */
 #login_container {
     position: absolute;
     right: 14px;
@@ -155,19 +152,16 @@ a { text-decoration: none; color: inherit; }
 #logout_section { display: none; text-align: center; }
 #logout_section p { font-size: 13px; color: var(--muted); margin-bottom: 8px; }
 
-/* ── Main ── */
 main {
     max-width: 860px;
     margin: 0 auto;
     padding: 40px 20px 80px;
 }
 
-/* ── Welcome ── */
 .welcome { text-align: center; margin-bottom: 40px; }
 .welcome h2 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
 .welcome p { color: var(--muted); font-size: 14px; }
 
-/* ── Section title ── */
 .menu-section h2 {
     font-size: 11px;
     font-weight: 700;
@@ -178,7 +172,6 @@ main {
     margin-bottom: 20px;
 }
 
-/* ── Pizza grid (index) ── */
 .pizza-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -205,7 +198,6 @@ main {
     font-weight: 600;
 }
 
-/* ── Page title ── */
 .page-title {
     font-size: 22px;
     font-weight: 700;
@@ -220,7 +212,6 @@ main {
     margin-bottom: 24px;
 }
 
-/* ── Menu grid ── */
 .menu {
     display: grid;
     gap: 12px;
@@ -277,7 +268,6 @@ main {
 
 .pizza button:hover { opacity: 0.85; }
 
-/* ── Toppings ── */
 .toppings { margin: 7px 0; font-size: 12px; }
 
 .toppings label {
@@ -293,7 +283,6 @@ main {
 
 input[type="checkbox"], input[type="radio"] { width: auto; accent-color: var(--red); cursor: pointer; }
 
-/* ── Oma pizza ── */
 .container {
     width: 100%;
     max-width: 420px;
@@ -361,7 +350,6 @@ input[type="checkbox"], input[type="radio"] { width: auto; accent-color: var(--r
 .error { color: var(--red); font-size: 12px; margin-top: 4px; }
 #vahvistus { color: #1a7a3c; font-size: 13px; margin-top: 8px; text-align: center; }
 
-/* ── Back ── */
 .back-button, .back { text-align: center; margin: 28px 0 16px; }
 
 .back-button button, .back a {
@@ -377,7 +365,6 @@ input[type="checkbox"], input[type="radio"] { width: auto; accent-color: var(--r
 
 .back-button button:hover, .back a:hover { color: var(--red); border-color: var(--red); }
 
-/* ── Drinks button ── */
 .drink-btn {
     font-family: 'DM Sans', sans-serif;
     font-size: 13px;
@@ -391,7 +378,6 @@ input[type="checkbox"], input[type="radio"] { width: auto; accent-color: var(--r
 
 .drink-btn:hover { opacity: 0.85; }
 
-/* ── Modal ── */
 .modal {
     display: none;
     position: fixed;
@@ -440,11 +426,105 @@ input[type="checkbox"], input[type="radio"] { width: auto; accent-color: var(--r
     border-color: var(--line);
 }
 
-/* ── Responsive ── */
 @media (max-width: 600px) {
     .pizza-grid { grid-template-columns: 1fr 1fr; }
     .menu { grid-template-columns: 1fr 1fr !important; }
     .container { margin: 16px 10px; padding: 18px 14px; }
     #login_container { position: static; margin: 6px 12px; }
     .navbar { justify-content: flex-start; }
+}
+
+.review-box {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #f8f8f8;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 250px;
+    z-index: 1000;
+}
+
+.star-rating {
+    font-size: 24px;
+    color: gold;
+}
+
+.star {
+    cursor: pointer;
+    color: gray;  
+}
+
+.star.selected {
+    color: gold;
+}
+
+textarea {
+    width: 100%;
+    height: 80px;
+    margin-top: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #cc5200;
+}
+
+#reviewMessage {
+    margin-top: 10px;
+    color: green;
+}
+
+.star {
+    cursor: pointer;
+    color: gray; 
+    font-size: 30px;
+}
+
+.star.selected {
+    color: gold; 
+}
+
+.star:hover {
+    color: gold;
+}
+
+body {
+    background-color: #f0f0f0; 
+}
+
+.main, .navbar, .review-box {
+    background-color: #e0e0e0; 
+}
+
+#reviewsList {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+#toggleReviewsBtn {
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#toggleReviewsBtn:hover {
+    background-color: #cc5200;
 }

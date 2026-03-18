@@ -111,3 +111,63 @@ window.addEventListener("load", function () {
         document.getElementById("logged_in_name").textContent = nimi;
     }
 });
+
+let selectedRating = 0; 
+
+function rate(stars) {
+    selectedRating = stars;
+    const starsList = document.querySelectorAll('.star');
+    
+    starsList.forEach(star => star.classList.remove('selected'));
+    
+    for (let i = 0; i < stars; i++) {
+        starsList[i].classList.add('selected');
+    }
+}
+
+function submitReview() {
+    const reviewText = document.getElementById('reviewText').value;
+    
+    if (selectedRating === 0 || reviewText === '') {
+        document.getElementById('reviewMessage').textContent = "Arvostelu ei ole kelvollinen. Valitse tähti ja kirjoita arvostelu.";
+        return;
+    }
+
+    const review = {
+        rating: selectedRating,
+        text: reviewText
+    };
+
+    let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+    reviews.push(review);
+    localStorage.setItem('reviews', JSON.stringify(reviews));
+
+    document.getElementById('reviewMessage').textContent = "Arvostelu lähetetty! Kiitos!";
+    document.getElementById('reviewText').value = '';
+    selectedRating = 0;  
+    updateReviews();
+}
+
+function updateReviews() {
+    const reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+    const reviewsList = document.getElementById('reviewsList');
+    reviewsList.innerHTML = '';  
+
+    reviews.forEach(review => {
+        const li = document.createElement('li');
+        li.innerHTML = `<strong>${'★'.repeat(review.rating)}</strong> ${review.text}`;
+        reviewsList.appendChild(li);
+    });
+}
+
+window.onload = function() {
+    updateReviews();
+
+    const stars = document.querySelectorAll('.star');
+    stars.forEach(star => {
+        star.addEventListener('click', function() {
+            const rating = parseInt(this.getAttribute('data-value'));
+            rate(rating);
+        });
+    });
+};

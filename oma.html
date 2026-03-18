@@ -2,131 +2,134 @@
 <html lang="fi">
 <head>
 <meta charset="UTF-8">
-<title>Luo oma pizza - Pizzeria Fantasia</title>
-<style>
-body { font-family: Arial; background:#f4f4f4; margin:0; padding:20px; }
-h1 { text-align:center; }
-
-.form-container { 
-  background:white; 
-  padding:20px; 
-  width:60%; 
-  margin:auto; 
-  border-radius:10px; 
-  box-shadow:0 0 10px rgba(0,0,0,0.1); 
-}
-
-button { 
-  background:#b22222; 
-  color:white; 
-  padding:10px 15px; 
-  border:none; 
-  border-radius:5px; 
-  cursor:pointer; 
-}
-
-button:hover { background:#8b0000; }
-
-.back { text-align:center; margin-top:20px; }
-
-/* Popup */
-.modal {
-  display:none;
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.5);
-}
-
-.modal-content {
-  background:white;
-  padding:20px;
-  width:40%;
-  margin:10% auto;
-  border-radius:10px;
-  text-align:center;
-}
-
-.success {
-  color:green;
-  font-weight:bold;
-  margin-top:10px;
-}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luo oma pizza - PizzaTown</title>
+<link rel="stylesheet" href="visuals.css">
 </head>
 <body>
 
-<h1>🍕 Luo oma pizza</h1>
+<header class="top-logo">
+    <img src="Images/Pizza logo.png" alt="PizzaTown logo">
+    <h1>PizzaTown</h1>
+    <p class="slogan">Tuoretta pizzaa joka päivä</p>
+</header>
 
-<div class="form-container">
-<form id="pizzaForm">
+<nav class="navbar">
+    <a href="index.html">Etusivu</a>
+    <a href="Valmiit pizzat.html">Valmiit pizzat</a>
+    <a href="oma.html">Luo oma pizza</a>
+    <a href="klassikot.html">Klassikot</a>
+    <div id="login_container">
+        <button id="login_toggle_btn" onclick="toggleLoginPanel()">Kirjaudu sisään</button>
+        <div id="login_panel">
+            <h3>Kirjaudu sisään</h3>
+            <div id="login_fields">
+                <input id="nimi" type="text" placeholder="Käyttäjänimi" />
+                <input id="salasana" type="password" placeholder="Salasana" />
+                <button class="btn-login" onclick="login()">Kirjaudu sisään</button>
+                <div id="panel_message" class="panel-message"></div>
+                <hr class="panel-divider">
+                <div class="register-section">
+                    <p>Ei vielä tiliä?</p>
+                    <button class="btn-register" onclick="rekisteröidy()">Rekisteröidy</button>
+                </div>
+            </div>
+            <div id="logout_section">
+                <p>Olet kirjautunut sisään, <strong id="logged_in_name"></strong>!</p>
+                <button class="btn-logout" onclick="logout()">Kirjaudu ulos</button>
+            </div>
+        </div>
+    </div>
+</nav>
 
-<label>Valitse koko:</label><br>
-<input type="radio" name="koko" value="Normaali" required> Normaali (8€)<br>
-<input type="radio" name="koko" value="Perhe"> Perhe (12€)<br><br>
+<div class="container">
+    <h2>Luo Fantasia-pizza</h2>
 
-<label>Valitse täytteet (+1€/kpl):</label><br>
-<input type="checkbox" value="Kinkku"> Kinkku<br>
-<input type="checkbox" value="Pepperoni"> Pepperoni<br>
-<input type="checkbox" value="Kana"> Kana<br>
-<input type="checkbox" value="Ananas"> Ananas<br>
-<input type="checkbox" value="Aurajuusto"> Aurajuusto<br>
-<input type="checkbox" value="Jalapeno"> Jalapeno<br><br>
+    <h3>Pohja</h3>
+    <label><input type="radio" name="pohja" value="Normaali" data-price="0" checked> Normaali</label>
+    <label><input type="radio" name="pohja" value="Gluteeniton" data-price="1.5"> Gluteeniton <em style="color:var(--red);font-style:normal;">+1.50 €</em></label>
 
-<button type="submit">Tilaa pizza</button>
-</form>
+    <h3>Kastike</h3>
+    <label><input type="radio" name="kastike" value="Tomaatti" data-price="0" checked> Tomaattikastike</label>
+    <label><input type="radio" name="kastike" value="Tomaatti + valkosipuli" data-price="0.5"> Tomaatti + valkosipuli <em style="color:var(--red);font-style:normal;">+0.50 €</em></label>
+
+    <h3>Täytteet (valitse 3–5)</h3>
+    <label><input type="checkbox" name="tayte" data-price="1.5" value="Kinkku"> Kinkku <em style="color:var(--red);font-style:normal;">+1.50 €</em></label>
+    <label><input type="checkbox" name="tayte" data-price="1.5" value="Pepperoni"> Pepperoni <em style="color:var(--red);font-style:normal;">+1.50 €</em></label>
+    <label><input type="checkbox" name="tayte" data-price="1.5" value="Kana"> Kana <em style="color:var(--red);font-style:normal;">+1.50 €</em></label>
+    <label><input type="checkbox" name="tayte" data-price="2.5" value="Parmankinkku"> Parmankinkku <em style="color:var(--red);font-style:normal;">+2.50 €</em></label>
+    <label><input type="checkbox" name="tayte" data-price="1.0" value="Ananas"> Ananas <em style="color:var(--red);font-style:normal;">+1.00 €</em></label>
+    <label><input type="checkbox" name="tayte" data-price="1.0" value="Sienet"> Sienet <em style="color:var(--red);font-style:normal;">+1.00 €</em></label>
+    <label><input type="checkbox" name="tayte" data-price="1.0" value="Oliivit"> Oliivit <em style="color:var(--red);font-style:normal;">+1.00 €</em></label>
+    <label><input type="checkbox" name="tayte" data-price="1.0" value="Punasipuli"> Punasipuli <em style="color:var(--red);font-style:normal;">+1.00 €</em></label>
+    <label><input type="checkbox" name="tayte" data-price="2.0" value="Aurajuusto"> Aurajuusto <em style="color:var(--red);font-style:normal;">+2.00 €</em></label>
+    <label><input type="checkbox" name="tayte" data-price="1.0" value="Jalapeño"> Jalapeño <em style="color:var(--red);font-style:normal;">+1.00 €</em></label>
+    <label><input type="checkbox" name="tayte" data-price="1.5" value="Kebab"> Kebab <em style="color:var(--red);font-style:normal;">+1.50 €</em></label>
+    <label><input type="checkbox" name="tayte" data-price="1.5" value="Jauheliha"> Jauheliha <em style="color:var(--red);font-style:normal;">+1.50 €</em></label>
+    <div class="error" id="error"></div>
+
+    <h3>Juusto</h3>
+    <label><input type="radio" name="juusto" value="Mozzarella" data-price="0" checked> Mozzarella</label>
+    <label><input type="radio" name="juusto" value="Buffalomozzarella" data-price="2.0"> Buffalomozzarella <em style="color:var(--red);font-style:normal;">+2.00 €</em></label>
+
+    <div class="total">Hinta: <span id="totalPrice">9.00</span> €</div>
+
+    <button onclick="hyvaksyPizza()">Lisää ostoskoriin</button>
+    <p id="vahvistus"></p>
 </div>
 
-<div id="orderModal" class="modal">
-  <div class="modal-content">
-    <h2>Tilauksesi</h2>
-    <p id="orderSummary"></p>
-    <h3 id="totalPrice"></h3>
-    <button onclick="confirmOrder()">Vahvista tilaus</button>
-    <button onclick="closeModal()">Peruuta</button>
-    <p id="successMessage" class="success"></p>
-  </div>
+<div class="back" style="padding-bottom:60px;">
+    <a href="index.html">← Takaisin etusivulle</a>
 </div>
 
-<div class="back">
-<a href="index.html">⬅ Takaisin etusivulle</a>
-</div>
-
+<script src="cart.js"></script>
+<script src="scripts.js"></script>
 <script>
-let currentTotal = 0;
+const basePrice = 9;
 
-document.getElementById("pizzaForm").addEventListener("submit", function(e){
-  e.preventDefault();
-
-  let koko = document.querySelector('input[name="koko"]:checked');
-  let taytteet = document.querySelectorAll('input[type="checkbox"]:checked');
-
-  let tayteLista = [];
-  taytteet.forEach(t => tayteLista.push(t.value));
-
-  let perusHinta = koko.value === "Normaali" ? 8 : 12;
-  let tayteHinta = tayteLista.length * 1;
-  currentTotal = perusHinta + tayteHinta;
-
-  let yhteenveto = "Koko: " + koko.value + "<br>";
-  yhteenveto += "Täytteet: " + (tayteLista.length > 0 ? tayteLista.join(", ") : "Ei täytteitä");
-
-  document.getElementById("orderSummary").innerHTML = yhteenveto;
-  document.getElementById("totalPrice").innerHTML = "Yhteensä: " + currentTotal + " €";
-  document.getElementById("orderModal").style.display = "block";
-});
-
-function closeModal(){
-  document.getElementById("orderModal").style.display = "none";
-  document.getElementById("successMessage").innerHTML = "";
+function calculatePrice(){
+    let total = basePrice;
+    document.querySelectorAll('input[name="pohja"]:checked, input[name="kastike"]:checked, input[name="juusto"]:checked').forEach(el => {
+        if(el.dataset.price) total += Number(el.dataset.price);
+    });
+    document.querySelectorAll('input[name="tayte"]:checked').forEach(el => {
+        if(el.dataset.price) total += Number(el.dataset.price);
+    });
+    document.getElementById("totalPrice").textContent = total.toFixed(2);
 }
 
-function confirmOrder(){
-  document.getElementById("successMessage").innerHTML = "✅ Tilaus onnistui! Kiitos tilauksesta.";
+document.querySelectorAll('input[name="tayte"]').forEach(el => el.addEventListener("change", checkToppings));
+document.querySelectorAll('input[type="radio"]').forEach(el => el.addEventListener("change", calculatePrice));
+
+function checkToppings(){
+    const checked = document.querySelectorAll('input[name="tayte"]:checked');
+    if(checked.length > 5){
+        this.checked = false;
+        document.getElementById("error").textContent = "Voit valita enintään 5 täytettä.";
+    } else {
+        document.getElementById("error").textContent = "";
+    }
+    calculatePrice();
+}
+
+function hyvaksyPizza(){
+    const toppings = document.querySelectorAll('input[name="tayte"]:checked');
+    if(toppings.length < 3 || toppings.length > 5){
+        document.getElementById("error").textContent = "Valitse 3–5 täytettä.";
+        return;
+    }
+    document.getElementById("error").textContent = "";
+
+    const pohja   = document.querySelector('input[name="pohja"]:checked').value;
+    const kastike = document.querySelector('input[name="kastike"]:checked').value;
+    const juusto  = document.querySelector('input[name="juusto"]:checked').value;
+    const lista   = [...toppings].map(t => t.value);
+    const price   = parseFloat(document.getElementById("totalPrice").textContent);
+
+    const details = `Pohja: ${pohja} | Kastike: ${kastike} | Juusto: ${juusto} | Täytteet: ${lista.join(", ")}`;
+    Cart.addItem("Fantasia-pizza", price, details);
+    document.getElementById("vahvistus").textContent = "✓ Lisätty ostoskoriin!";
 }
 </script>
-
 </body>
 </html>
